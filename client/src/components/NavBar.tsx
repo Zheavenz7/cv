@@ -49,9 +49,13 @@ export default function NavBar() {
   
   return (
     <nav className={cn(
-      "fixed top-0 left-0 right-0 z-50 transition-all duration-500",
+      "fixed top-0 left-0 right-0 z-50 transition-all duration-500 will-change-transform",
       scrolled ? "backdrop-blur-md bg-darkBg/80 shadow-lg py-2" : "bg-transparent py-4"
-    )}>
+    )}
+    style={{
+      transition: 'background-color 0.5s ease-out, padding 0.3s ease-out, backdrop-filter 0.5s ease-out, box-shadow 0.5s ease-out'
+    }}
+    >
       <div className="container mx-auto px-4 flex flex-wrap items-center justify-between">
         {/* Logo/Name */}
         <a href="#home" className="text-2xl font-bold font-montserrat tracking-wide text-primary">

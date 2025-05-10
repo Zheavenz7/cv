@@ -1,39 +1,62 @@
 import { motion } from 'framer-motion';
-import { useEffect, useState } from 'react';
+import { useEffect, useState, useRef } from 'react';
+import { throttle } from '@/lib/utils';
 import resumeData from '@/data/resumeData';
 
 export default function HeroSection() {
   const { name, title, summary } = resumeData.personalInfo;
   const [scrollY, setScrollY] = useState(0);
+  const sectionRef = useRef<HTMLElement>(null);
   
-  // Handle scroll for manual parallax effect
+  // Handle scroll for manual parallax effect - using throttle for better performance
   useEffect(() => {
-    const handleScroll = () => {
+    // Optimized scroll handler with throttling to improve performance
+    const handleScroll = throttle(() => {
       setScrollY(window.scrollY);
-    };
+    }, 10);
     
     window.addEventListener('scroll', handleScroll);
+    
+    // Set initial value
+    setScrollY(window.scrollY);
+    
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
   
-  // Calculate parallax values
-  const yOffset = scrollY * 0.5; // Move at half the scroll speed
-  const opacity = 1 - Math.min(1, scrollY / 500); // Fade out gradually as user scrolls
+  // Calculate parallax values with smoother transitions
+  const yOffset = scrollY * 0.3; // Move at 30% of the scroll speed for smoother effect
+  
+  // Use a slower fade-out to ensure the text remains visible longer
+  const opacity = Math.max(0, 1 - (scrollY / 1000)); // Much slower fade out (was 700)
+  
+  // Calculate scale effect - content gets slightly smaller as you scroll down
+  const scale = Math.max(0.9, 1 - (scrollY / 3000));
   
   return (
     <section 
+      ref={sectionRef}
       id="home" 
-      className="relative min-h-screen flex items-center justify-center pt-24 overflow-hidden"
+      className="relative min-h-screen flex items-center justify-center pt-24 overflow-hidden will-change-transform"
     >
-      <motion.div 
-        className="container mx-auto px-4 py-16 text-center"
-        style={{ 
-          transform: `translateY(${yOffset}px)`,
-          opacity 
+      {/* Background gradient overlay */}
+      <div 
+        className="absolute inset-0 bg-gradient-to-b from-darkBg/0 via-darkBg/0 to-darkBg/70 pointer-events-none z-10"
+        style={{
+          opacity: Math.min(1, scrollY / 300)
         }}
-        initial={{ opacity: 0 }}
-        animate={{ opacity: 1 }}
-        transition={{ duration: 0.5 }}
+      />
+      
+      {/* Main content with parallax effect */}
+      <motion.div 
+        className="container relative mx-auto px-4 py-16 text-center z-20 will-change-transform"
+        style={{ 
+          transform: `translateY(${yOffset}px) scale(${scale})`,
+          opacity,
+          transition: 'transform 0.15s ease-out, opacity 0.3s ease-out, scale 0.3s ease-out'
+        }}
+        initial={{ opacity: 0, y: 20 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.7 }}
       >
         {/* Profile Image */}
         <div className="inline-block mb-6 p-1 rounded-full bg-gradient-to-r from-primary to-blue-400">
