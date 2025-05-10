@@ -31,7 +31,7 @@ export default function ProjectsSection() {
               transition={{ duration: 0.5, delay: index * 0.1 }}
             >
               <div className="h-48 bg-gradient-to-br from-blue-800 to-blue-900 flex items-center justify-center">
-                <i className={getProjectIcon(project.title)} className="text-5xl text-blue-300 opacity-70"></i>
+                <i className={`${getProjectIcon(project.title)} text-5xl text-blue-300 opacity-70`}></i>
               </div>
               <div className="p-6">
                 <h3 className="text-xl font-bold mb-2">{project.title}</h3>

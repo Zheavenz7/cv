@@ -4,21 +4,46 @@ import { cn } from '@/lib/utils';
 export default function NavBar() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
+  const [activeSection, setActiveSection] = useState('home');
   
   const toggleMenu = () => {
     setIsMenuOpen(!isMenuOpen);
   };
   
+  const closeMenu = () => {
+    setIsMenuOpen(false);
+  };
+  
   useEffect(() => {
     const handleScroll = () => {
+      // Update scrolled state for navbar background
       if (window.scrollY > 50) {
         setScrolled(true);
       } else {
         setScrolled(false);
       }
+      
+      // Find the current active section
+      const sections = document.querySelectorAll('section[id]');
+      let found = false;
+      
+      Array.from(sections).reverse().forEach(section => {
+        if (!found) {
+          const sectionTop = (section as HTMLElement).offsetTop;
+          const sectionHeight = (section as HTMLElement).clientHeight;
+          
+          if (window.scrollY >= sectionTop - 200) {
+            setActiveSection(section.id);
+            found = true;
+          }
+        }
+      });
     };
     
     window.addEventListener('scroll', handleScroll);
+    // Call once on mount to set initial state
+    handleScroll();
+    
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
   
@@ -35,7 +60,7 @@ export default function NavBar() {
 
         {/* Mobile Menu Button */}
         <button 
-          className="md:hidden text-lightText focus:outline-none"
+          className="md:hidden text-white focus:outline-none focus:ring-2 focus:ring-primary rounded-md p-2"
           onClick={toggleMenu}
           aria-label="Toggle menu"
         >
@@ -49,12 +74,26 @@ export default function NavBar() {
             isMenuOpen ? "flex" : "hidden"
           )}
         >
-          <a href="#home" className="navbar-link py-1 px-2 transition-colors duration-300 hover:text-primary active">Home</a>
-          <a href="#about" className="navbar-link py-1 px-2 transition-colors duration-300 hover:text-primary">About</a>
-          <a href="#skills" className="navbar-link py-1 px-2 transition-colors duration-300 hover:text-primary">Skills</a>
-          <a href="#experience" className="navbar-link py-1 px-2 transition-colors duration-300 hover:text-primary">Experience</a>
-          <a href="#projects" className="navbar-link py-1 px-2 transition-colors duration-300 hover:text-primary">Projects</a>
-          <a href="#contact" className="navbar-link py-1 px-2 transition-colors duration-300 hover:text-primary">Contact</a>
+          {[
+            { id: 'home', label: 'Home' },
+            { id: 'about', label: 'About' },
+            { id: 'skills', label: 'Skills' },
+            { id: 'experience', label: 'Experience' },
+            { id: 'projects', label: 'Projects' },
+            { id: 'contact', label: 'Contact' }
+          ].map(item => (
+            <a 
+              key={item.id}
+              href={`#${item.id}`}
+              className={cn(
+                "navbar-link py-1 px-2 transition-colors duration-300 hover:text-primary",
+                activeSection === item.id ? "text-primary font-semibold" : "text-white"
+              )}
+              onClick={closeMenu}
+            >
+              {item.label}
+            </a>
+          ))}
         </div>
       </div>
     </nav>

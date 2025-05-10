@@ -1,4 +1,4 @@
-import { useEffect, useRef } from "react";
+import { useEffect } from "react";
 import NavBar from "@/components/NavBar";
 import ParticleBackground from "@/components/ParticleBackground";
 import HeroSection from "@/components/HeroSection";
@@ -11,51 +11,52 @@ import Footer from "@/components/Footer";
 import ScrollToTopButton from "@/components/ScrollToTopButton";
 
 export default function Home() {
-  const sections = useRef<HTMLElement[]>([]);
-
-  const highlightNavLinks = () => {
-    const scrollPosition = window.scrollY;
-    
-    // Find the current visible section
-    let currentSection = '';
-    
-    sections.current.forEach((section) => {
-      const sectionTop = section.offsetTop;
-      const sectionHeight = section.clientHeight;
-      
-      if (scrollPosition >= sectionTop - 200) {
-        currentSection = section.id;
-      }
-    });
-    
-    // Update active nav link
-    const navLinks = document.querySelectorAll('.navbar-link');
-    navLinks.forEach((link) => {
-      link.classList.remove('active');
-      const href = (link as HTMLAnchorElement).getAttribute('href');
-      if (href && href.substring(1) === currentSection) {
-        link.classList.add('active');
-      }
-    });
-  };
-
   useEffect(() => {
-    // Collect all sections
-    sections.current = Array.from(document.querySelectorAll('section[id]'));
+    // Smooth scroll function for anchor links
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+      anchor.addEventListener('click', function (this: HTMLAnchorElement, e: Event) {
+        e.preventDefault();
+        
+        const targetId = this.getAttribute('href')?.substring(1);
+        if (!targetId) return;
+        
+        const targetElement = document.getElementById(targetId);
+        if (!targetElement) return;
+        
+        window.scrollTo({
+          top: targetElement.offsetTop - 80, // Offset for navbar height
+          behavior: 'smooth'
+        });
+        
+        // Update URL hash without scrolling
+        window.history.pushState(null, '', `#${targetId}`);
+      });
+    });
     
-    // Add scroll event listener for nav highlighting
-    window.addEventListener('scroll', highlightNavLinks);
-    
-    // Initial call
-    highlightNavLinks();
+    // Handle initial hash in URL
+    if (window.location.hash) {
+      const targetId = window.location.hash.substring(1);
+      const targetElement = document.getElementById(targetId);
+      
+      if (targetElement) {
+        setTimeout(() => {
+          window.scrollTo({
+            top: targetElement.offsetTop - 80,
+            behavior: 'smooth'
+          });
+        }, 300);
+      }
+    }
     
     return () => {
-      window.removeEventListener('scroll', highlightNavLinks);
+      document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+        anchor.removeEventListener('click', () => {});
+      });
     };
   }, []);
 
   return (
-    <div className="relative z-10 bg-darkBg text-lightText">
+    <div className="relative z-10 bg-darkBg text-white">
       <ParticleBackground />
       
       <NavBar />
