@@ -378,37 +378,30 @@ const InteractiveBackground = () => {
       animationFrameId.current = requestAnimationFrame(animate);
     };
 
-    const handleMouseMove = (e: MouseEvent) => {
-      const rect = canvas.getBoundingClientRect();
+    const handlePointerMove = (e: PointerEvent) => {
       mouseRef.current = {
-        x: e.clientX - rect.left,
-        y: e.clientY - rect.top
+        x: e.clientX,
+        y: e.clientY
       };
-      if (mouseRef.current.x !== null && mouseRef.current.y !== null) {
-        techRipplesRef.current.push(new Ripple(mouseRef.current.x, mouseRef.current.y));
-      }
+      techRipplesRef.current.push(new Ripple(e.clientX, e.clientY));
       autoDriftRef.current = false;
     };
 
-    const handleMouseOut = (e: MouseEvent) => {
-      // Check if mouse really left the viewport
-      if (!e.relatedTarget || e.relatedTarget === document.documentElement) {
-        mouseRef.current = { x: null, y: null };
-        autoDriftRef.current = true;
-      }
+    const handlePointerLeave = () => {
+      mouseRef.current = { x: null, y: null };
+      autoDriftRef.current = true;
     };
 
-    const handleClick = (e: MouseEvent) => {
-      const rect = canvas.getBoundingClientRect();
-      const clickX = e.clientX - rect.left;
-      const clickY = e.clientY - rect.top;
+    const handlePointerDown = (e: PointerEvent) => {
+      const x = e.clientX;
+      const y = e.clientY;
 
-      ripplesRef.current.push(new Ripple(clickX, clickY, 0, 60));
+      ripplesRef.current.push(new Ripple(x, y, 0, 60));
 
       for (let i = 0; i < 15; i++) {
         const angle = Math.random() * Math.PI * 2;
         const speed = Math.random() * 2 + 1;
-        const particle = new Particle(clickX, clickY, true);
+        const particle = new Particle(x, y, true);
         particle.vx = Math.cos(angle) * speed;
         particle.vy = Math.sin(angle) * speed;
         fireworkParticlesRef.current.push(particle);
@@ -417,15 +410,15 @@ const InteractiveBackground = () => {
 
     animate();
 
-    window.addEventListener('mousemove', handleMouseMove);
-    window.addEventListener('mouseout', handleMouseOut);
-    window.addEventListener('click', handleClick);
+    document.addEventListener('pointermove', handlePointerMove, { passive: true });
+    document.addEventListener('pointerleave', handlePointerLeave);
+    document.addEventListener('pointerdown', handlePointerDown);
     window.addEventListener('resize', resizeCanvas);
 
     return () => {
-      window.removeEventListener('mousemove', handleMouseMove);
-      window.removeEventListener('mouseout', handleMouseOut);
-      window.removeEventListener('click', handleClick);
+      document.removeEventListener('pointermove', handlePointerMove);
+      document.removeEventListener('pointerleave', handlePointerLeave);
+      document.removeEventListener('pointerdown', handlePointerDown);
       window.removeEventListener('resize', resizeCanvas);
       if (animationFrameId.current) {
         cancelAnimationFrame(animationFrameId.current);
@@ -437,7 +430,7 @@ const InteractiveBackground = () => {
     <canvas
       ref={canvasRef}
       className="fixed top-0 left-0 w-full h-full z-0"
-      style={{ pointerEvents: 'auto' }}
+      style={{ pointerEvents: 'none' }}
     />
   );
 };
