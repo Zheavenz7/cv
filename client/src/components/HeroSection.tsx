@@ -1,9 +1,33 @@
 import { motion } from 'framer-motion';
-import { useEffect, useState, useRef } from 'react';
+import { useEffect, useState, useRef, createContext, useContext } from 'react';
 import { throttle } from '@/lib/utils';
 import resumeData from '@/data/resumeData';
 
+// Create a context for mouse position
+export const MouseContext = createContext<{x: number; y: number}>({ x: 0, y: 0 });
+
+export function useMousePosition() {
+  const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 });
+
+  useEffect(() => {
+    const handleMouseMove = (e: MouseEvent) => {
+      setMousePosition({
+        x: e.clientX / window.innerWidth,
+        y: e.clientY / window.innerHeight
+      });
+    };
+
+    window.addEventListener('mousemove', handleMouseMove);
+    return () => {
+      window.removeEventListener('mousemove', handleMouseMove);
+    };
+  }, []);
+
+  return mousePosition;
+}
+
 export default function HeroSection() {
+  const mousePosition = useMousePosition();
   const { name, title, summary } = resumeData.personalInfo;
   const [scrollY, setScrollY] = useState(0);
   const sectionRef = useRef<HTMLElement>(null);
@@ -40,9 +64,16 @@ export default function HeroSection() {
     >
       {/* Background gradient overlay */}
       <div 
-        className="absolute inset-0 bg-gradient-to-b from-darkBg/0 via-darkBg/0 to-darkBg/70 pointer-events-none z-10"
+        className="absolute inset-0 pointer-events-none z-10"
         style={{
-          opacity: Math.min(1, scrollY / 300)
+          opacity: Math.min(1, scrollY / 300),
+          background: `radial-gradient(
+            circle at ${mousePosition.x * 100}% ${mousePosition.y * 100}%,
+            rgba(30, 64, 175, 0.2) 0%,
+            rgba(30, 41, 59, 0) 60%
+          ),
+          linear-gradient(to bottom, rgba(15, 23, 42, 0) 0%, rgba(15, 23, 42, 0.7) 100%)`,
+          transition: 'background 0.2s ease-out'
         }}
       />
       

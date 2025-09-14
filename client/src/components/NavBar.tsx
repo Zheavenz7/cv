@@ -1,4 +1,5 @@
 import { useState, useEffect } from 'react';
+import { Link, useLocation } from 'wouter';
 import { cn } from '@/lib/utils';
 
 export default function NavBar() {
@@ -49,7 +50,7 @@ export default function NavBar() {
   
   return (
     <nav className={cn(
-      "fixed top-0 left-0 right-0 z-50 transition-all duration-500 will-change-transform",
+      "fixed top-0 left-0 right-0 z-30 transition-all duration-500 will-change-transform",
       scrolled ? "backdrop-blur-md bg-darkBg/80 shadow-lg py-2" : "bg-transparent py-4"
     )}
     style={{
@@ -58,9 +59,9 @@ export default function NavBar() {
     >
       <div className="container mx-auto px-4 flex flex-wrap items-center justify-between">
         {/* Logo/Name */}
-        <a href="#home" className="text-2xl font-bold font-montserrat tracking-wide text-primary">
+        <Link href="/" className="text-2xl font-bold font-montserrat tracking-wide text-primary">
           Jamal Drenthe
-        </a>
+        </Link>
 
         {/* Mobile Menu Button */}
         <button 
@@ -88,14 +89,17 @@ export default function NavBar() {
           ].map(item => (
             <a 
               key={item.id}
-              href={`#${item.id}`}
+              href={`/${item.id === 'home' ? '' : item.id}`}
+              asChild
               className={cn(
                 "navbar-link py-1 px-2 transition-colors duration-300 hover:text-primary",
                 activeSection === item.id ? "text-primary font-semibold" : "text-white"
               )}
               onClick={closeMenu}
             >
-              {item.label}
+              <Link href={item.id === 'home' ? '/' : `/${item.id}`}>
+                {item.label}
+              </Link>
             </a>
           ))}
         </div>

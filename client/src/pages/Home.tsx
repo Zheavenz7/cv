@@ -1,4 +1,6 @@
 import { useEffect } from "react";
+import { MouseContext } from '@/components/HeroSection';
+import { useMousePosition } from "@/components/HeroSection";
 import NavBar from "@/components/NavBar";
 import ParticleBackground from "@/components/ParticleBackground";
 import HeroSection from "@/components/HeroSection";
@@ -55,23 +57,27 @@ export default function Home() {
     };
   }, []);
 
+  const mousePosition = useMousePosition();
+
   return (
-    <div className="relative z-10 bg-darkBg text-white">
-      <ParticleBackground />
-      
-      <NavBar />
-      
-      <main>
-        <HeroSection />
-        <AboutSection />
-        <SkillsSection />
-        <ExperienceSection />
-        <ProjectsSection />
-        <ContactSection />
-      </main>
-      
-      <Footer />
-      <ScrollToTopButton />
-    </div>
+    <MouseContext.Provider value={mousePosition}>
+      <div className="relative z-10 bg-darkBg text-white">
+        <ParticleBackground />
+        
+        <NavBar />
+        
+        <main>
+          <HeroSection />
+          <AboutSection />
+          <SkillsSection />
+          <ExperienceSection />
+          <ProjectsSection />
+          <ContactSection />
+        </main>
+        
+        <Footer />
+        <ScrollToTopButton />
+      </div>
+    </MouseContext.Provider>
   );
 }
