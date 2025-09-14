@@ -390,9 +390,12 @@ const InteractiveBackground = () => {
       autoDriftRef.current = false;
     };
 
-    const handleMouseLeave = () => {
-      mouseRef.current = { x: null, y: null };
-      autoDriftRef.current = true;
+    const handleMouseOut = (e: MouseEvent) => {
+      // Check if mouse really left the viewport
+      if (!e.relatedTarget || e.relatedTarget === document.documentElement) {
+        mouseRef.current = { x: null, y: null };
+        autoDriftRef.current = true;
+      }
     };
 
     const handleClick = (e: MouseEvent) => {
@@ -414,15 +417,15 @@ const InteractiveBackground = () => {
 
     animate();
 
-    canvas.addEventListener('mousemove', handleMouseMove);
-    canvas.addEventListener('mouseleave', handleMouseLeave);
-    canvas.addEventListener('click', handleClick);
+    window.addEventListener('mousemove', handleMouseMove);
+    window.addEventListener('mouseout', handleMouseOut);
+    window.addEventListener('click', handleClick);
     window.addEventListener('resize', resizeCanvas);
 
     return () => {
-      canvas.removeEventListener('mousemove', handleMouseMove);
-      canvas.removeEventListener('mouseleave', handleMouseLeave);
-      canvas.removeEventListener('click', handleClick);
+      window.removeEventListener('mousemove', handleMouseMove);
+      window.removeEventListener('mouseout', handleMouseOut);
+      window.removeEventListener('click', handleClick);
       window.removeEventListener('resize', resizeCanvas);
       if (animationFrameId.current) {
         cancelAnimationFrame(animationFrameId.current);
