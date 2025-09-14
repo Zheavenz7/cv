@@ -83,14 +83,16 @@ import LoginLoansPage from "@/pages/login/login-loans/index";
 import LoginPaymentsPage from "@/pages/login/login-payments/index";
 import LoginReferralPage from "@/pages/login/login-referral/index";
 import LoginStreamingPage from "@/pages/login/login-streaming/index";
-
-// Layout component that includes the Navbar
 function Layout({ children }: { children: React.ReactNode }) {
   return (
     <div className="min-h-screen bg-darkBg text-white relative">
       <InteractiveBackground />
-      <NavBar />
-      <main className="relative z-10">{children}</main>
+      <div className="relative z-10 pointer-events-none">
+        <div className="pointer-events-auto">
+          <NavBar />
+        </div>
+        <main className="relative pointer-events-auto">{children}</main>
+      </div>
     </div>
   );
 }
