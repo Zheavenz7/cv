@@ -1,11 +1,176 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import { Link, useLocation } from 'wouter';
 import { cn } from '@/lib/utils';
+import { navigationItems } from '@/data/navigation';
+import { Button } from '@/components/ui/button';
+import { Menu, X, ChevronDown } from 'lucide-react';
+import { motion, AnimatePresence } from 'framer-motion';
+
+interface NavItemProps {
+  item: {
+    id: string;
+    label: string;
+    href: string;
+    children?: any[];
+  };
+  isMobile?: boolean;
+  onClose?: () => void;
+}
+
+const NavLink = ({ item, isMobile = false, onClick }: { 
+  item: { id: string; label: string; href: string }; 
+  isMobile?: boolean; 
+  onClick?: () => void;
+}) => {
+  const [location] = useLocation();
+  const isActive = location === item.href || 
+                  (location === '/' && item.href === '/') || 
+                  (location.startsWith(item.href) && item.href !== '/');
+  
+  return (
+    <Link 
+      href={item.href} 
+      className={cn(
+        'block px-4 py-2 text-sm font-medium transition-all duration-200 rounded-md',
+        isActive 
+          ? 'text-primary bg-primary/10 font-semibold' 
+          : 'text-white/90 hover:text-white hover:bg-white/5',
+        isMobile ? 'w-full text-left' : ''
+      )}
+      onClick={onClick}
+    >
+      {item.label}
+    </Link>
+  );
+};
+
+const DesktopDropdown = ({ item }: { item: any }) => {
+  const [isOpen, setIsOpen] = useState(false);
+  const dropdownRef = useRef<HTMLDivElement>(null);
+  const timeoutRef = useRef<NodeJS.Timeout>();
+
+  const handleMouseEnter = () => {
+    if (timeoutRef.current) {
+      clearTimeout(timeoutRef.current);
+    }
+    setIsOpen(true);
+  };
+
+  const handleMouseLeave = () => {
+    timeoutRef.current = setTimeout(() => {
+      setIsOpen(false);
+    }, 150);
+  };
+
+  useEffect(() => {
+    return () => {
+      if (timeoutRef.current) {
+        clearTimeout(timeoutRef.current);
+      }
+    };
+  }, []);
+
+  const [location] = useLocation();
+  const isActive = location.startsWith(item.href);
+
+  return (
+    <div 
+      ref={dropdownRef}
+      className="relative"
+      onMouseEnter={handleMouseEnter}
+      onMouseLeave={handleMouseLeave}
+    >
+      <button
+        className={cn(
+          "flex items-center gap-1 px-3 py-2 text-sm font-medium transition-all duration-200 rounded-md",
+          isActive || isOpen
+            ? "text-primary bg-primary/10 font-semibold"
+            : "text-white/90 hover:text-white hover:bg-white/5"
+        )}
+      >
+        {item.label}
+        <ChevronDown className={cn(
+          "h-4 w-4 transition-transform duration-200",
+          isOpen ? "rotate-180" : ""
+        )} />
+      </button>
+
+      <AnimatePresence>
+        {isOpen && (
+          <motion.div
+            initial={{ opacity: 0, y: 10, scale: 0.95 }}
+            animate={{ opacity: 1, y: 0, scale: 1 }}
+            exit={{ opacity: 0, y: 10, scale: 0.95 }}
+            transition={{ duration: 0.15 }}
+            className="absolute left-0 top-full mt-2 min-w-[220px] z-50"
+          >
+            <div className="bg-gray-800/95 backdrop-blur-xl border border-white/10 rounded-xl shadow-2xl p-2">
+              <div className="space-y-1">
+                {item.children?.map((child: any) => (
+                  <Link
+                    key={child.id}
+                    href={child.href}
+                    className="block px-3 py-2 text-sm text-white/90 hover:text-white hover:bg-white/10 rounded-md transition-colors duration-200"
+                    onClick={() => setIsOpen(false)}
+                  >
+                    {child.label}
+                  </Link>
+                ))}
+              </div>
+            </div>
+          </motion.div>
+        )}
+      </AnimatePresence>
+    </div>
+  );
+};
+
+const MobileNavItem = ({ item, onClose }: NavItemProps) => {
+  const [isOpen, setIsOpen] = useState(false);
+  
+  if (item.children) {
+    return (
+      <div className="w-full">
+        <button 
+          className="w-full flex items-center justify-between px-4 py-3 text-base font-medium text-white/90 hover:text-white hover:bg-white/5 rounded-md transition-colors duration-200"
+          onClick={() => setIsOpen(!isOpen)}
+        >
+          {item.label}
+          <ChevronDown className={cn(
+            "h-4 w-4 transition-transform duration-200",
+            isOpen ? "rotate-180" : ""
+          )} />
+        </button>
+        <AnimatePresence>
+          {isOpen && (
+            <motion.div
+              initial={{ opacity: 0, height: 0 }}
+              animate={{ opacity: 1, height: "auto" }}
+              exit={{ opacity: 0, height: 0 }}
+              transition={{ duration: 0.2 }}
+              className="pl-4 mt-1 space-y-1 bg-white/5 rounded-md overflow-hidden"
+            >
+              {item.children.map((child) => (
+                <NavLink 
+                  key={child.id} 
+                  item={child} 
+                  isMobile 
+                  onClick={onClose} 
+                />
+              ))}
+            </motion.div>
+          )}
+        </AnimatePresence>
+      </div>
+    );
+  }
+  
+  return <NavLink item={item} isMobile onClick={onClose} />;
+};
 
 export default function NavBar() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
-  const [activeSection, setActiveSection] = useState('home');
   
   const toggleMenu = () => {
     setIsMenuOpen(!isMenuOpen);
@@ -17,93 +182,108 @@ export default function NavBar() {
   
   useEffect(() => {
     const handleScroll = () => {
-      // Update scrolled state for navbar background with smoother transition
-      if (window.scrollY > 200) {
-        setScrolled(true);
-      } else {
-        setScrolled(false);
-      }
-      
-      // Find the current active section
-      const sections = document.querySelectorAll('section[id]');
-      let found = false;
-      
-      Array.from(sections).reverse().forEach(section => {
-        if (!found) {
-          const sectionTop = (section as HTMLElement).offsetTop;
-          const sectionHeight = (section as HTMLElement).clientHeight;
-          
-          if (window.scrollY >= sectionTop - 200) {
-            setActiveSection(section.id);
-            found = true;
-          }
-        }
-      });
+      setScrolled(window.scrollY > 20);
     };
     
     window.addEventListener('scroll', handleScroll);
-    // Call once on mount to set initial state
     handleScroll();
     
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
   
+  const [location] = useLocation();
+  useEffect(() => {
+    closeMenu();
+  }, [location]);
+
+  // Close menu when clicking outside on mobile
+  useEffect(() => {
+    const handleClickOutside = (event: MouseEvent) => {
+      if (isMenuOpen) {
+        closeMenu();
+      }
+    };
+
+    if (isMenuOpen) {
+      document.addEventListener('click', handleClickOutside);
+    }
+
+    return () => {
+      document.removeEventListener('click', handleClickOutside);
+    };
+  }, [isMenuOpen]);
+
   return (
     <nav className={cn(
-      "fixed top-0 left-0 right-0 z-30 transition-all duration-500 will-change-transform",
-      scrolled ? "backdrop-blur-md bg-darkBg/80 shadow-lg py-2" : "bg-transparent py-4"
-    )}
-    style={{
-      transition: 'background-color 0.5s ease-out, padding 0.3s ease-out, backdrop-filter 0.5s ease-out, box-shadow 0.5s ease-out'
-    }}
-    >
-      <div className="container mx-auto px-4 flex flex-wrap items-center justify-between">
-        {/* Logo/Name */}
-        <Link href="/" className="text-2xl font-bold font-montserrat tracking-wide text-primary">
+      'fixed top-0 left-0 right-0 z-50 transition-all duration-300',
+      scrolled 
+        ? 'bg-gray-900/95 backdrop-blur-md border-b border-white/10 shadow-xl py-2' 
+        : 'bg-gray-900/90 backdrop-blur-sm py-4'
+    )}>
+      <div className="container flex items-center justify-between h-16 px-4 mx-auto max-w-7xl">
+        {/* Logo */}
+        <Link 
+          href="/" 
+          className="text-2xl font-bold text-primary transition-colors hover:text-primary/90 flex items-center gap-2"
+          onClick={closeMenu}
+        >
+          <div className="w-8 h-8 bg-gradient-to-r from-primary to-accent rounded-full flex items-center justify-center">
+            <span className="text-white text-sm font-bold">JD</span>
+          </div>
           Jamal Drenthe
         </Link>
 
-        {/* Mobile Menu Button */}
-        <button 
-          className="md:hidden text-white focus:outline-none focus:ring-2 focus:ring-primary rounded-md p-2"
-          onClick={toggleMenu}
-          aria-label="Toggle menu"
-        >
-          <i className={`fas fa-${isMenuOpen ? 'times' : 'bars'} text-xl`}></i>
-        </button>
-
-        {/* Navigation Links */}
-        <div 
-          className={cn(
-            "md:flex flex-col md:flex-row w-full md:w-auto mt-3 md:mt-0 space-y-2 md:space-y-0 md:space-x-6",
-            isMenuOpen ? "flex" : "hidden"
-          )}
-        >
-          {[
-            { id: 'home', label: 'Home' },
-            { id: 'about', label: 'About' },
-            { id: 'skills', label: 'Skills' },
-            { id: 'experience', label: 'Experience' },
-            { id: 'projects', label: 'Projects' },
-            { id: 'contact', label: 'Contact' }
-          ].map(item => (
-            <a 
-              key={item.id}
-              href={`/${item.id === 'home' ? '' : item.id}`}
-              asChild
-              className={cn(
-                "navbar-link py-1 px-2 transition-colors duration-300 hover:text-primary",
-                activeSection === item.id ? "text-primary font-semibold" : "text-white"
-              )}
-              onClick={closeMenu}
-            >
-              <Link href={item.id === 'home' ? '/' : `/${item.id}`}>
-                {item.label}
-              </Link>
-            </a>
+        {/* Desktop Navigation */}
+        <div className="hidden lg:flex items-center space-x-1">
+          {navigationItems.map((item) => (
+            item.children ? (
+              <DesktopDropdown key={item.id} item={item} />
+            ) : (
+              <NavLink key={item.id} item={item} />
+            )
           ))}
         </div>
+
+        {/* Mobile menu button */}
+        <div className="lg:hidden">
+          <Button
+            variant="ghost"
+            size="icon"
+            className="text-white hover:bg-white/10 focus:outline-none focus:ring-2 focus:ring-primary/50 rounded-lg"
+            onClick={(e) => {
+              e.stopPropagation();
+              toggleMenu();
+            }}
+          >
+            {isMenuOpen ? (
+              <X className="h-5 w-5" />
+            ) : (
+              <Menu className="h-5 w-5" />
+            )}
+            <span className="sr-only">Toggle menu</span>
+          </Button>
+        </div>
       </div>
+
+      {/* Mobile menu */}
+      <AnimatePresence>
+        {isMenuOpen && (
+          <motion.div
+            initial={{ opacity: 0, height: 0 }}
+            animate={{ opacity: 1, height: "auto" }}
+            exit={{ opacity: 0, height: 0 }}
+            transition={{ duration: 0.3 }}
+            className="lg:hidden bg-gray-900/95 backdrop-blur-md border-t border-white/10 overflow-hidden"
+            onClick={(e) => e.stopPropagation()}
+          >
+            <div className="px-4 py-4 space-y-2">
+              {navigationItems.map((item) => (
+                <MobileNavItem key={item.id} item={item} onClose={closeMenu} />
+              ))}
+            </div>
+          </motion.div>
+        )}
+      </AnimatePresence>
     </nav>
   );
 }
