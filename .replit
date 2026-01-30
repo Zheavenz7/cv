@@ -19,10 +19,6 @@ exposeLocalhost = true
 localPort = 40531
 externalPort = 3000
 
-[[ports]]
-localPort = 40907
-externalPort = 3001
-
 [workflows]
 runButton = "Project"
 
@@ -43,3 +39,6 @@ author = "agent"
 task = "shell.exec"
 args = "npm run dev"
 waitForPort = 5000
+
+[agent]
+expertMode = true
