@@ -1,55 +1,61 @@
 import { useEffect } from 'react';
-import { motion } from 'framer-motion';
-import { pageContent } from '@/data/pageContent';
+import NavBar from "@/components/NavBar";
+import Footer from "@/components/Footer";
 
 export default function About() {
-  const content = pageContent['about'];
-  
   useEffect(() => {
-    document.title = content.seo.title;
+    document.title = 'Over Mij | Jamal Hiwat Drenthe';
   }, []);
 
   return (
-    <div className="min-h-screen pt-20 px-4">
-      <section className="container mx-auto py-12 max-w-6xl space-y-12">
-        {/* Blurb Section */}
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          className="relative overflow-hidden rounded-3xl p-8 md:p-12"
-          style={{
-            background: 'rgba(255, 255, 255, 0.03)',
-            backdropFilter: 'blur(20px)',
-            border: '1px solid rgba(255, 255, 255, 0.1)',
-            boxShadow: '0 8px 32px 0 rgba(0, 0, 0, 0.37)',
-          }}
-        >
-          <h1 className="text-3xl md:text-4xl font-bold mb-6 bg-gradient-to-r from-green-400 via-teal-400 to-blue-400 bg-clip-text text-transparent">
-            About Me
-          </h1>
-          <p className="text-lg md:text-xl text-gray-300 leading-relaxed">
-            {content.blurb}
-          </p>
-          <div className="absolute top-0 right-0 w-64 h-64 bg-gradient-to-br from-green-500/20 to-blue-500/20 rounded-full blur-3xl"></div>
-        </motion.div>
-
-        {/* Full Content */}
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          className="prose prose-invert max-w-none rounded-3xl p-8 md:p-10"
-          style={{
-            background: 'rgba(255, 255, 255, 0.03)',
-            backdropFilter: 'blur(20px)',
-            border: '1px solid rgba(255, 255, 255, 0.1)',
-          }}
-        >
-          <div className="text-gray-300 leading-relaxed whitespace-pre-line">
-            {content.fullPage}
+    <div className="min-h-screen bg-darkBg text-white relative">
+      <NavBar />
+      <main className="pt-24 pb-12 px-4 container mx-auto">
+        <h1 className="text-4xl font-bold mb-8 text-center text-primary font-montserrat">Over Mij</h1>
+        
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-12 items-center mb-16">
+          <div className="space-y-6">
+            <h2 className="text-2xl font-semibold text-primary">Jamal Hiwat Drenthe</h2>
+            <p className="text-lg leading-relaxed text-gray-300">
+              Ster in IT en Recht! Gediplomeerd in Communicatie, Marketing, Business & Sales.
+            </p>
+            <p className="text-gray-400 leading-relaxed">
+              Ik ben een gepassioneerde Full Stack Developer met een unieke achtergrond in Recht en Marketing. 
+              Mijn aanpak combineert technische precisie met een diep begrip van zakelijke behoeften en juridische kaders.
+            </p>
           </div>
-        </motion.div>
-      </section>
+          <div className="bg-darkBgAlt p-8 rounded-xl border border-primary/20 shadow-xl">
+            <h3 className="text-xl font-bold mb-4 text-primary">Opleiding</h3>
+            <ul className="space-y-4">
+              <li>
+                <div className="font-semibold">HBO-Rechten</div>
+                <div className="text-sm text-gray-400">Hogeschool Utrecht (2014 - 2018)</div>
+              </li>
+              <li>
+                <div className="font-semibold">MHBO Marketing & Communicatie</div>
+                <div className="text-sm text-gray-400">Regio College Zaandam (2012 - 2014)</div>
+              </li>
+            </ul>
+          </div>
+        </div>
+
+        <div className="mt-12">
+          <h2 className="text-3xl font-bold mb-8 text-center font-montserrat">Ervaring</h2>
+          <div className="space-y-8 max-w-4xl mx-auto">
+            <div className="bg-darkBgAlt p-6 rounded-lg border-l-4 border-primary">
+              <h3 className="text-xl font-bold">Full Stack Developer</h3>
+              <div className="text-primary mb-2">Spontiva LTD | 2022 - 2023</div>
+              <p className="text-gray-400">End-to-End Developer | Fullstack Specialist</p>
+            </div>
+            <div className="bg-darkBgAlt p-6 rounded-lg border-l-4 border-primary">
+              <h3 className="text-xl font-bold">Freelancer</h3>
+              <div className="text-primary mb-2">Temper Amsterdam | 2016 - 2024</div>
+              <p className="text-gray-400">Uitgebreide ervaring in diverse rollen waaronder Event Manager en Bar Manager bij top-locaties in Amsterdam.</p>
+            </div>
+          </div>
+        </div>
+      </main>
+      <Footer />
     </div>
   );
 }
