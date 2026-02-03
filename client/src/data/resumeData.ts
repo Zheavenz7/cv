@@ -28,9 +28,9 @@ export interface Project {
 // Data extracted from the provided CV
 const resumeData = {
   personalInfo: {
-    name: "Jamal Drenthe",
-    title: "Full Stack Developer | Web & Mobile | UI/UX | 3D & Audio Integrations",
-    location: "Amsterdam, The Netherlands",
+    name: "Jamal Hiwat Drenthe",
+    title: "Senior Consultant | Full Stack Developer | Recht & Business Strategie",
+    location: "Amsterdam, Nederland",
     email: "js.drenthe@gmail.com",
     summary: "Veelzijdige professional met een sterke achtergrond in IT, Recht en Sales. Gediplomeerd in Communicatie, Marketing, Business & Sales. Ik ontwerp en bouw schaalbare, veilige en gebruikersgerichte digitale systemen, variërend van responsive UI tot complexe backends en strategisch bedrijfsadvies.",
     languages: [

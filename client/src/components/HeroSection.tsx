@@ -3,6 +3,7 @@ import { useEffect, useState, useRef, createContext, useContext } from 'react';
 import { throttle } from '@/lib/utils';
 import resumeData from '@/data/resumeData';
 import { Link } from 'wouter';
+import profileImg from '@/assets/images/profile.jpg';
 
 // Create a context for mouse position
 export const MouseContext = createContext<{x: number; y: number}>({ x: 0, y: 0 });
@@ -92,15 +93,11 @@ export default function HeroSection() {
       >
         {/* Profile Image */}
         <div className="inline-block mb-6 p-1 rounded-full bg-gradient-to-r from-primary to-blue-400 shadow-lg shadow-primary/20">
-          <div className="w-40 h-40 rounded-full bg-darkBgAlt border-2 border-primary/30 flex items-center justify-center text-4xl text-primary font-bold overflow-hidden">
+          <div className="w-40 h-40 rounded-full bg-darkBgAlt border-2 border-primary/30 flex items-center justify-center overflow-hidden">
             <img 
-              src="https://media.licdn.com/dms/image/v2/D4E03AQF-z-f_YmPz_g/profile-displayphoto-shrink_800_800/profile-displayphoto-shrink_800_800/0/1690465545465?e=1731542400&v=beta&t=H3-gJ-F2_J_H8Y0_X-y_F-Y_F-Y_F-Y_F-Y" 
+              src={profileImg} 
               alt={name}
               className="w-full h-full object-cover"
-              onError={(e) => {
-                (e.target as HTMLImageElement).style.display = 'none';
-                (e.target as HTMLImageElement).parentElement!.textContent = name.split(' ').map(part => part[0]).join('');
-              }}
             />
           </div>
         </div>
