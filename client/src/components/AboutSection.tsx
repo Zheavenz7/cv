@@ -30,8 +30,8 @@ export default function AboutSection() {
           >
             <p className="text-lg">
               Ik ben gevestigd in Amsterdam Centrum, en ben beschikbaar voor werk over de hele wereld. 
-              Als Full Stack Developer ben ik gespecialiseerd in het leveren van volledig functionele apps, 
-              dashboards, automatiseringsstromen, API's, betalingssystemen en integraties van diensten van derden.
+              Als een veelzijdige professional met ervaring in IT, Recht en Sales, specialiseer ik me in het leveren van volledig functionele applicaties, 
+              dashboards, automatiseringsflows en strategisch advies.
             </p>
             <p className="text-lg text-gray-400 italic">
               "Ster in IT en Recht! Gediplomeerd in Communicatie, Marketing, Business & Sales!"
@@ -53,14 +53,14 @@ export default function AboutSection() {
           >
             <div className="bg-darkBg/80 rounded-xl p-6 backdrop-blur-md shadow-lg">
               <h3 className="text-xl font-semibold mb-4 text-primary">
-                <i className="fas fa-user-graduate mr-2"></i>Professional Summary
+                <i className="fas fa-user-graduate mr-2"></i>Professionele Samenvatting
               </h3>
               <p>{summary}</p>
             </div>
             
             <div className="bg-darkBg/80 rounded-xl p-6 backdrop-blur-md shadow-lg">
               <h3 className="text-xl font-semibold mb-4 text-primary">
-                <i className="fas fa-language mr-2"></i>Languages
+                <i className="fas fa-language mr-2"></i>Talen
               </h3>
               <div className="space-y-2">
                 {languages.map((lang, index) => (
@@ -74,9 +74,9 @@ export default function AboutSection() {
             
             <div className="bg-darkBg/80 rounded-xl p-6 backdrop-blur-md shadow-lg">
               <h3 className="text-xl font-semibold mb-4 text-primary">
-                <i className="fas fa-map-marker-alt mr-2"></i>Location
+                <i className="fas fa-map-marker-alt mr-2"></i>Locatie
               </h3>
-              <p>{location} | Remote</p>
+              <p>{location} | Op afstand beschikbaar</p>
               <p className="mt-2">
                 <i className="fas fa-envelope mr-2"></i>{email}
               </p>

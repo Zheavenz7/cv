@@ -32,17 +32,17 @@ const resumeData = {
     title: "Full Stack Developer | Web & Mobile | UI/UX | 3D & Audio Integrations",
     location: "Amsterdam, The Netherlands",
     email: "js.drenthe@gmail.com",
-    summary: "Experienced Full Stack Developer with a strong command of modern web and mobile technologies. I design and build scalable, secure, and user-focused digital systems. Covering everything from responsive UI to backends, real-time data handling, audio processing, and 3D visualizations.",
+    summary: "Veelzijdige professional met een sterke achtergrond in IT, Recht en Sales. Gediplomeerd in Communicatie, Marketing, Business & Sales. Ik ontwerp en bouw schaalbare, veilige en gebruikersgerichte digitale systemen, variërend van responsive UI tot complexe backends en strategisch bedrijfsadvies.",
     languages: [
-      { language: "Dutch", level: "Native" },
-      { language: "English", level: "Fluent" }
+      { language: "Nederlands", level: "Moedertaal" },
+      { language: "Engels", level: "Vloeiend" }
     ],
     softSkills: [
-      "Self-managed",
-      "Deadline-driven",
-      "Problem solver",
-      "User-centered design",
-      "Team player"
+      "Zelfsturend",
+      "Deadline-gericht",
+      "Probleemoplosser",
+      "Gebruikersgericht ontwerp",
+      "Teamspeler"
     ]
   },
   
@@ -103,25 +103,102 @@ const resumeData = {
   
   experiences: [
     {
-      title: "Full Stack Developer",
-      company: "Freelance",
-      period: "2020 - Present",
-      description: "Designing and building scalable, secure, and user-focused digital systems covering everything from responsive UI to backends, real-time data handling, audio processing, and 3D visualizations.",
-      technologies: ["React", "TypeScript", "Tailwind CSS", "Node.js", "Supabase"]
+      title: "Senior Consultant",
+      company: "Pearson & Partners",
+      period: "jan. 2026 - heden",
+      description: "Een professional is meer dan alleen werkervaring of een online presentatie. Focus op strategisch advies en partnerschappen.",
+      technologies: ["Consultancy", "Strategie", "Business Development"]
     },
     {
-      title: "Mobile App Developer",
-      company: "TechStartup Inc.",
-      period: "2018 - 2020",
-      description: "Led the development of mobile applications using Flutter for cross-platform deployment. Implemented full authentication flows, real-time updates, and file upload functionality.",
-      technologies: ["Flutter", "Firebase", "Dart", "UI/UX"]
+      title: "Consultant",
+      company: "VodafoneZiggo",
+      period: "okt. 2025 - heden",
+      description: "Freelance Consultant. Voorheen D2D Onderaannemer @Salesmates. Hybride rol gericht op klantadvies en verkoopstrategieën.",
+      technologies: ["Sales", "Freelance", "Direct Sales"]
     },
     {
-      title: "Web Developer",
-      company: "Digital Agency XYZ",
-      period: "2016 - 2018",
-      description: "Created responsive websites and web applications for various clients. Worked with e-commerce platforms and implemented payment gateways.",
-      technologies: ["HTML/CSS", "JavaScript", "PHP", "MySQL", "Stripe"]
+      title: "Kwaliteitsspecialist",
+      company: "Samsung Electronics",
+      period: "nov. 2025 - jan. 2026",
+      description: "Freelance Kwaliteitsspecialist op afstand. Verantwoordelijk voor kwaliteitscontrole en procesoptimalisatie.",
+      technologies: ["Quality Assurance", "Samsung Ecosystem", "Remote Work"]
+    },
+    {
+      title: "Consultant",
+      company: "Eneco",
+      period: "sep. 2025 - jan. 2026",
+      description: "Freelance Consultant op afstand. Advies over energieoplossingen en duurzaamheid.",
+      technologies: ["Energy", "Consulting", "Sustainability"]
+    },
+    {
+      title: "Duurzaamheidsconsulent",
+      company: "Belnino",
+      period: "sep. 2025 - nov. 2025",
+      description: "Verantwoordelijk voor het adviseren en proactief benaderen van potentiële nieuwe klanten via outbound, koude acquisitieactiviteiten. Gericht op cross-sell van diverse energieoplossingen.",
+      technologies: ["Telemarketing", "Salesdock", "Duurzaamheid"]
+    },
+    {
+      title: "Freelancer",
+      company: "Vinted",
+      period: "okt. 2023 - jun. 2025",
+      description: "Hybride Fulltime rol binnen de e-commerce sector.",
+      technologies: ["E-commerce", "Platform Management"]
+    },
+    {
+      title: "Freelancer",
+      company: "YoungOnes",
+      period: "apr. 2022 - apr. 2023",
+      description: "Freelance opdrachten op locatie door heel Nederland.",
+      technologies: ["Hospitality", "Logistics", "Freelance"]
+    },
+    {
+      title: "Vrijwilliger",
+      company: "DOCK",
+      period: "apr. 2020 - feb. 2022",
+      description: "Vrijwilligerswerk in Amsterdam, Noord-Holland.",
+      technologies: ["Community Support", "Social Work"]
+    },
+    {
+      title: "Freelancer",
+      company: "Temper",
+      period: "okt. 2016 - feb. 2020",
+      description: "Uitgebreide horeca en event ervaring bij top-locaties in Amsterdam waaronder: De Foodhallen, W Hotel Lounge, Conservatorium Hotel, en meer.",
+      technologies: ["Horeca", "Event Management", "Hospitality"]
+    },
+    {
+      title: "Topverkoper",
+      company: "Essent",
+      period: "okt. 2014 - okt. 2016",
+      description: "Gefocust op acquisitie en klantrelaties in de energiesector.",
+      technologies: ["Sales", "Account Management"]
+    },
+    {
+      title: "Telemarketing KPN, Vodafone",
+      company: "2Contact",
+      period: "aug. 2013 - sep. 2014",
+      description: "Parttime telemarketing in Haarlem.",
+      technologies: ["Sales", "Communication"]
+    },
+    {
+      title: "Teamleider",
+      company: "Hot Networkz BV",
+      period: "aug. 2013 - aug. 2014",
+      description: "Fulltime leidinggevende rol gefocust op sales teams.",
+      technologies: ["Leadership", "Sales Management"]
+    },
+    {
+      title: "Compliance Manager",
+      company: "Hot Networkz BV",
+      period: "jul. 2013 - jul. 2014",
+      description: "Parttime rol gericht op compliance en kwaliteitsbewaking.",
+      technologies: ["Compliance", "Quality Control"]
+    },
+    {
+      title: "Stagiair Filiaalmanager",
+      company: "Hot Networkz BV",
+      period: "sep. 2012 - jul. 2013",
+      description: "Stagetraject voor filiaalmanagement.",
+      technologies: ["Management Trainee"]
     }
   ],
   
