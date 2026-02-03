@@ -2,6 +2,7 @@ import { motion } from 'framer-motion';
 import { useEffect, useState, useRef, createContext, useContext } from 'react';
 import { throttle } from '@/lib/utils';
 import resumeData from '@/data/resumeData';
+import { Link } from 'wouter';
 
 // Create a context for mouse position
 export const MouseContext = createContext<{x: number; y: number}>({ x: 0, y: 0 });
@@ -90,10 +91,17 @@ export default function HeroSection() {
         transition={{ duration: 0.7 }}
       >
         {/* Profile Image */}
-        <div className="inline-block mb-6 p-1 rounded-full bg-gradient-to-r from-primary to-blue-400">
-          {/* Using a placeholder avatar, can be replaced with actual photo later */}
-          <div className="w-40 h-40 rounded-full bg-gradient-to-br from-blue-500 to-blue-800 flex items-center justify-center text-4xl text-white font-bold">
-            {name.split(' ').map(part => part[0]).join('')}
+        <div className="inline-block mb-6 p-1 rounded-full bg-gradient-to-r from-primary to-blue-400 shadow-lg shadow-primary/20">
+          <div className="w-40 h-40 rounded-full bg-darkBgAlt border-2 border-primary/30 flex items-center justify-center text-4xl text-primary font-bold overflow-hidden">
+            <img 
+              src="https://media.licdn.com/dms/image/v2/D4E03AQF-z-f_YmPz_g/profile-displayphoto-shrink_800_800/profile-displayphoto-shrink_800_800/0/1690465545465?e=1731542400&v=beta&t=H3-gJ-F2_J_H8Y0_X-y_F-Y_F-Y_F-Y_F-Y" 
+              alt={name}
+              className="w-full h-full object-cover"
+              onError={(e) => {
+                (e.target as HTMLImageElement).style.display = 'none';
+                (e.target as HTMLImageElement).parentElement!.textContent = name.split(' ').map(part => part[0]).join('');
+              }}
+            />
           </div>
         </div>
         
@@ -130,12 +138,12 @@ export default function HeroSection() {
           animate={{ y: 0, opacity: 1 }}
           transition={{ delay: 0.5, duration: 0.5 }}
         >
-          <a href="#contact" className="px-8 py-3 bg-primary text-white font-medium rounded-lg transition-all duration-300 hover:bg-blue-600 focus:ring-4 focus:ring-blue-300 focus:outline-none">
+          <Link href="/contact" className="px-8 py-3 bg-primary text-darkBg font-bold rounded-lg transition-all duration-300 hover:bg-blue-600 focus:ring-4 focus:ring-blue-300 focus:outline-none">
             Contact Me
-          </a>
-          <a href="#projects" className="px-8 py-3 bg-transparent border border-primary text-primary font-medium rounded-lg transition-all duration-300 hover:bg-primary/10 focus:ring-4 focus:ring-blue-300 focus:outline-none">
+          </Link>
+          <Link href="/projects" className="px-8 py-3 bg-transparent border border-primary text-primary font-medium rounded-lg transition-all duration-300 hover:bg-primary/10 focus:ring-4 focus:ring-blue-300 focus:outline-none">
             View Projects
-          </a>
+          </Link>
         </motion.div>
         
         {/* Social Media Links */}

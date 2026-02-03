@@ -14,7 +14,7 @@ export default function AboutSection() {
       <div className="container mx-auto px-4">
         <h2 className="text-3xl md:text-4xl font-bold font-montserrat text-center mb-16 relative overflow-hidden">
           <span className="relative z-10 inline-block px-4 py-2 after:absolute after:w-full after:h-1 after:bg-primary after:bottom-0 after:left-0">
-            About Me
+            Over Mij
           </span>
         </h2>
         
@@ -29,14 +29,12 @@ export default function AboutSection() {
             transition={{ duration: 0.5 }}
           >
             <p className="text-lg">
-              I'm based in {location}, and am available for remote work worldwide. 
-              As a Full Stack Developer, I specialize in delivering fully functional apps, 
-              dashboards, automation flows, APIs, payment systems, and third-party service integrations.
+              Ik ben gevestigd in Amsterdam Centrum, en ben beschikbaar voor werk over de hele wereld. 
+              Als Full Stack Developer ben ik gespecialiseerd in het leveren van volledig functionele apps, 
+              dashboards, automatiseringsstromen, API's, betalingssystemen en integraties van diensten van derden.
             </p>
-            <p className="text-lg">
-              My expertise extends from responsive UI to backends, real-time data handling, 
-              audio processing, and 3D visualizations. I'm passionate about creating seamless 
-              user experiences backed by robust, scalable architectures.
+            <p className="text-lg text-gray-400 italic">
+              "Ster in IT en Recht! Gediplomeerd in Communicatie, Marketing, Business & Sales!"
             </p>
             <div className="flex flex-wrap gap-3 mt-8">
               {softSkills.map((skill, index) => (

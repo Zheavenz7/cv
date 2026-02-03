@@ -14,7 +14,7 @@ export default function ExperienceSection() {
       <div className="container mx-auto px-4">
         <h2 className="text-3xl md:text-4xl font-bold font-montserrat text-center mb-16 relative overflow-hidden">
           <span className="relative z-10 inline-block px-4 py-2 after:absolute after:w-full after:h-1 after:bg-primary after:bottom-0 after:left-0">
-            Experience
+            Ervaring
           </span>
         </h2>
         

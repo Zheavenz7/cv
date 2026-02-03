@@ -171,6 +171,18 @@ const MobileNavItem = ({ item, onClose }: NavItemProps) => {
 export default function NavBar() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
+  const [isBlackAndWhite, setIsBlackAndWhite] = useState(false);
+  const [location] = useLocation();
+
+  useEffect(() => {
+    if (isBlackAndWhite) {
+      document.body.classList.add('black-and-white');
+    } else {
+      document.body.classList.remove('black-and-white');
+    }
+  }, [isBlackAndWhite]);
+
+  const toggleTheme = () => setIsBlackAndWhite(!isBlackAndWhite);
   
   const toggleMenu = () => {
     setIsMenuOpen(!isMenuOpen);
@@ -182,7 +194,12 @@ export default function NavBar() {
   
   useEffect(() => {
     const handleScroll = () => {
-      setScrolled(window.scrollY > 20);
+      // Update scrolled state for navbar background with smoother transition
+      if (window.scrollY > 200) {
+        setScrolled(true);
+      } else {
+        setScrolled(false);
+      }
     };
     
     window.addEventListener('scroll', handleScroll);
@@ -191,7 +208,6 @@ export default function NavBar() {
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
   
-  const [location] = useLocation();
   useEffect(() => {
     closeMenu();
   }, [location]);
@@ -242,6 +258,17 @@ export default function NavBar() {
               <NavLink key={item.id} item={item} />
             )
           ))}
+          <button
+            onClick={toggleTheme}
+            className="ml-2 p-2 rounded-full hover:bg-white/10 transition-colors text-white"
+            aria-label="Toggle theme"
+          >
+            {isBlackAndWhite ? (
+              <i className="fas fa-palette"></i>
+            ) : (
+              <i className="fas fa-ghost"></i>
+            )}
+          </button>
         </div>
 
         {/* Mobile menu button */}
@@ -280,6 +307,21 @@ export default function NavBar() {
               {navigationItems.map((item) => (
                 <MobileNavItem key={item.id} item={item} onClose={closeMenu} />
               ))}
+              <button
+                onClick={() => {
+                  toggleTheme();
+                  closeMenu();
+                }}
+                className="w-full flex items-center justify-center gap-2 px-4 py-3 rounded-lg bg-white/5 text-white hover:bg-white/10 transition-colors"
+                aria-label="Toggle theme"
+              >
+                {isBlackAndWhite ? (
+                  <i className="fas fa-palette"></i>
+                ) : (
+                  <i className="fas fa-ghost"></i>
+                )}
+                <span className="text-sm font-medium">Thema wisselen</span>
+              </button>
             </div>
           </motion.div>
         )}

@@ -12,9 +12,9 @@ export default function Footer() {
           animate={{ opacity: 1 }}
           transition={{ duration: 0.5 }}
         >
-          <p>&copy; {currentYear} Jamal Drenthe</p>
+          <p>&copy; {currentYear} Jamal Hiwat Drenthe</p>
           <span className="hidden md:block text-primary">•</span>
-          <p>All rights reserved</p>
+          <p>Alle rechten voorbehouden</p>
           <span className="hidden md:block text-primary">•</span>
           <p className="text-sm">Full Stack Developer</p>
         </motion.div>
