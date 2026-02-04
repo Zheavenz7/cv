@@ -33,13 +33,31 @@ export default function ExperienceSection() {
                 animate={isVisible ? { x: 0, opacity: 1 } : { x: -50, opacity: 0 }}
                 transition={{ duration: 0.5, delay: index * 0.2 }}
               >
-                <div className="flex flex-wrap justify-between items-start mb-2">
+                <div className="flex flex-wrap justify-between items-start mb-2 gap-2">
                   <h3 className="text-xl font-bold text-primary">{exp.title}</h3>
                   <div className="flex flex-col items-end">
-                    <span className="text-sm bg-primary/20 text-primary px-3 py-1 rounded-full mt-1">
+                    <span className="text-sm bg-primary/20 text-primary px-3 py-1 rounded-full whitespace-nowrap">
                       {exp.period}
                     </span>
-                    <span className="text-xs text-gray-400 mt-1">{exp.company === 'Pearson & Partners' || exp.company === 'Belnino' || exp.company === 'Vinted' || exp.company === 'Hot Networkz BV' || exp.company === 'Essent' ? 'Fulltime' : exp.company === 'VodafoneZiggo' || exp.company === 'Samsung Electronics' || exp.company === 'Eneco' || exp.company === 'Temper' || exp.company === 'YoungOnes' ? 'Freelance' : 'Parttime'}</span>
+                    <span className="text-xs text-gray-400 mt-1">
+                      {exp.company === 'Pearson & Partners' || 
+                       exp.company === 'Belnino' || 
+                       exp.company === 'Vinted' || 
+                       exp.company === 'Hot Networkz BV' || 
+                       exp.company === 'Essent' ||
+                       exp.company === 'Streetwise' ||
+                       exp.company === '2Contact'
+                       ? 'Fulltime' 
+                       : exp.company === 'VodafoneZiggo' || 
+                         exp.company === 'Samsung Electronics' || 
+                         exp.company === 'Eneco' || 
+                         exp.company === 'Temper' || 
+                         exp.company === 'YoungOnes' ||
+                         exp.company === 'W Hotel Management & Services' ||
+                         exp.company === 'Spontiva LTD'
+                       ? 'Freelance' 
+                       : 'Parttime'}
+                    </span>
                   </div>
                 </div>
                 <h4 className="text-lg font-medium mb-2">{exp.company}</h4>

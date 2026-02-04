@@ -132,18 +132,18 @@ const resumeData = {
       technologies: ["E-commerce", "Platform Management"]
     },
     {
-      title: "Freelancer",
-      company: "YoungOnes",
-      period: "apr. 2022 - apr. 2023",
-      description: "Freelance opdrachten op locatie door heel Nederland.",
-      technologies: ["Hospitality", "Logistics", "Freelance"]
-    },
-    {
       title: "Full Stack Developer",
       company: "Spontiva LTD",
       period: "2022 - 2023",
       description: "End-to-End Developer | Fullstack Specialist",
       technologies: ["React", "Node.js", "TypeScript", "Fullstack"]
+    },
+    {
+      title: "Freelancer",
+      company: "YoungOnes",
+      period: "apr. 2022 - apr. 2023",
+      description: "Freelance opdrachten op locatie door heel Nederland.",
+      technologies: ["Hospitality", "Logistics", "Freelance"]
     },
     {
       title: "Vrijwilliger",
@@ -242,62 +242,6 @@ const resumeData = {
       period: "sep. 2007 - jul. 2008",
       description: "Eerste IT-ervaring tijdens een stageproject.",
       technologies: ["IT Support", "Systeembeheer"]
-    },
-    {
-      title: "Freelancer",
-      company: "YoungOnes",
-      period: "apr. 2022 - apr. 2023",
-      description: "Freelance opdrachten op locatie door heel Nederland.",
-      technologies: ["Hospitality", "Logistics", "Freelance"]
-    },
-    {
-      title: "Vrijwilliger",
-      company: "DOCK",
-      period: "apr. 2020 - feb. 2022",
-      description: "Vrijwilligerswerk in Amsterdam, Noord-Holland.",
-      technologies: ["Community Support", "Social Work"]
-    },
-    {
-      title: "Freelancer",
-      company: "Temper",
-      period: "okt. 2016 - feb. 2020",
-      description: "Uitgebreide horeca en event ervaring bij top-locaties in Amsterdam waaronder: De Foodhallen, W Hotel Lounge, Conservatorium Hotel, en meer.",
-      technologies: ["Horeca", "Event Management", "Hospitality"]
-    },
-    {
-      title: "Topverkoper",
-      company: "Essent",
-      period: "okt. 2014 - okt. 2016",
-      description: "Gefocust op acquisitie en klantrelaties in de energiesector.",
-      technologies: ["Sales", "Account Management"]
-    },
-    {
-      title: "Telemarketing KPN, Vodafone",
-      company: "2Contact",
-      period: "aug. 2013 - sep. 2014",
-      description: "Parttime telemarketing in Haarlem.",
-      technologies: ["Sales", "Communication"]
-    },
-    {
-      title: "Teamleider",
-      company: "Hot Networkz BV",
-      period: "aug. 2013 - aug. 2014",
-      description: "Fulltime leidinggevende rol gefocust op sales teams.",
-      technologies: ["Leadership", "Sales Management"]
-    },
-    {
-      title: "Compliance Manager",
-      company: "Hot Networkz BV",
-      period: "jul. 2013 - jul. 2014",
-      description: "Parttime rol gericht op compliance en kwaliteitsbewaking.",
-      technologies: ["Compliance", "Quality Control"]
-    },
-    {
-      title: "Stagiair Filiaalmanager",
-      company: "Hot Networkz BV",
-      period: "sep. 2012 - jul. 2013",
-      description: "Stagetraject voor filiaalmanagement.",
-      technologies: ["Management Trainee"]
     }
   ],
   
