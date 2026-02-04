@@ -21,7 +21,7 @@ export default function SkillsSection() {
         
         <div 
           ref={sectionRef}
-          className={`section-content grid md:grid-cols-2 lg:grid-cols-3 gap-8 ${isVisible ? 'visible' : ''}`}
+          className={`section-content grid md:grid-cols-2 lg:grid-cols-4 gap-8 ${isVisible ? 'visible' : ''}`}
         >
           {skillCategories.map((category, categoryIndex) => (
             <motion.div 

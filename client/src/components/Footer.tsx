@@ -16,7 +16,7 @@ export default function Footer() {
           <span className="hidden md:block text-primary">•</span>
           <p>Alle rechten voorbehouden</p>
           <span className="hidden md:block text-primary">•</span>
-          <p className="text-sm">Full Stack Developer</p>
+          <p className="text-sm">Senior Consultant | Full Stack Developer | Recht & Strategie</p>
         </motion.div>
         
         <motion.div 

@@ -231,6 +231,7 @@ export default function NavBar() {
 
   return (
     <nav className={cn(
+<<<<<<< HEAD
       'fixed top-0 left-0 right-0 z-50 transition-all duration-300',
       scrolled 
         ? 'bg-gray-900/95 backdrop-blur-md border-b border-white/10 shadow-xl py-2' 
@@ -257,6 +258,54 @@ export default function NavBar() {
             ) : (
               <NavLink key={item.id} item={item} />
             )
+=======
+      "fixed top-0 left-0 right-0 z-30 transition-all duration-500 will-change-transform",
+      scrolled ? "backdrop-blur-md bg-darkBg/80 shadow-lg py-2" : "bg-transparent py-4"
+    )}
+    style={{
+      transition: 'background-color 0.5s ease-out, padding 0.3s ease-out, backdrop-filter 0.5s ease-out, box-shadow 0.5s ease-out'
+    }}
+    >
+      <div className="container mx-auto px-4 flex flex-wrap items-center justify-between">
+        {/* Logo/Name */}
+        <Link href="/" className="text-2xl font-bold font-montserrat tracking-wide text-primary">
+          Jamal Hiwat Drenthe
+        </Link>
+
+        {/* Mobile Menu Button */}
+        <button 
+          className="md:hidden text-white focus:outline-none focus:ring-2 focus:ring-primary rounded-md p-2"
+          onClick={toggleMenu}
+          aria-label="Toggle menu"
+        >
+          <i className={`fas fa-${isMenuOpen ? 'times' : 'bars'} text-xl`}></i>
+        </button>
+
+        {/* Navigation Links */}
+        <div 
+          className={cn(
+            "md:flex items-center space-x-6",
+            isMenuOpen ? "flex flex-col absolute top-full left-0 right-0 bg-darkBgAlt p-4 space-y-4 md:static md:bg-transparent md:p-0 md:space-y-0" : "hidden md:flex"
+          )}
+        >
+          {[
+            { id: 'home', label: 'Home' },
+            { id: 'about', label: 'Over Mij' },
+            { id: 'projects', label: 'Projecten' },
+            { id: 'contact', label: 'Contact' }
+          ].map(item => (
+            <Link 
+              key={item.id}
+              href={item.id === 'home' ? '/' : `/${item.id}`}
+              className={cn(
+                "navbar-link py-1 px-2 transition-colors duration-300 hover:text-primary cursor-pointer",
+                location === (item.id === 'home' ? '/' : `/${item.id}`) ? "text-primary font-semibold" : "text-white"
+              )}
+              onClick={closeMenu}
+            >
+              {item.label}
+            </Link>
+>>>>>>> 1cb19f9 (Update website content and navigation to reflect professional profile and Dutch language)
           ))}
           <button
             onClick={toggleTheme}

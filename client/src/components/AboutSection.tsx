@@ -29,7 +29,7 @@ export default function AboutSection() {
             transition={{ duration: 0.5 }}
           >
             <p className="text-lg">
-              Ik ben gevestigd in Amsterdam Centrum, en ben beschikbaar voor werk over de hele wereld. 
+              Ik ben gevestigd in Amsterdam en ben beschikbaar voor werk over de hele wereld. 
               Als een veelzijdige professional met ervaring in IT, Recht en Sales, specialiseer ik me in het leveren van volledig functionele applicaties, 
               dashboards, automatiseringsflows en strategisch advies.
             </p>

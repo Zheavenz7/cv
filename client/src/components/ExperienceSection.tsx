@@ -35,9 +35,12 @@ export default function ExperienceSection() {
               >
                 <div className="flex flex-wrap justify-between items-start mb-2">
                   <h3 className="text-xl font-bold text-primary">{exp.title}</h3>
-                  <span className="text-sm bg-primary/20 text-primary px-3 py-1 rounded-full mt-1">
-                    {exp.period}
-                  </span>
+                  <div className="flex flex-col items-end">
+                    <span className="text-sm bg-primary/20 text-primary px-3 py-1 rounded-full mt-1">
+                      {exp.period}
+                    </span>
+                    <span className="text-xs text-gray-400 mt-1">{exp.company === 'Pearson & Partners' || exp.company === 'Belnino' || exp.company === 'Vinted' || exp.company === 'Hot Networkz BV' || exp.company === 'Essent' ? 'Fulltime' : exp.company === 'VodafoneZiggo' || exp.company === 'Samsung Electronics' || exp.company === 'Eneco' || exp.company === 'Temper' || exp.company === 'YoungOnes' ? 'Freelance' : 'Parttime'}</span>
+                  </div>
                 </div>
                 <h4 className="text-lg font-medium mb-2">{exp.company}</h4>
                 <p className="text-gray-300 mb-4">
