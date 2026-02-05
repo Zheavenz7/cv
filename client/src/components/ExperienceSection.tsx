@@ -20,7 +20,7 @@ export default function ExperienceSection() {
         
         <div 
           ref={sectionRef}
-          className={`section-content max-w-4xl mx-auto opacity-0 translate-y-8 transition-all duration-700 ease-out ${isVisible ? '!opacity-100 !translate-y-0' : ''}`}
+          className={`section-content max-w-4xl mx-auto opacity-100 translate-y-0 transition-all duration-700 ease-out`}
         >
           <div className="relative border-l-2 border-primary pl-6 pb-10">
             <div className="absolute top-0 left-0 w-4 h-4 rounded-full bg-primary -translate-x-1/2"></div>
@@ -30,9 +30,8 @@ export default function ExperienceSection() {
                 <motion.div 
                   key={index}
                   className="mb-12 transform transition-all duration-500 hover:translate-x-2"
-                  initial={{ x: -50, opacity: 0 }}
-                  animate={isVisible ? { x: 0, opacity: 1 } : { x: -50, opacity: 0 }}
-                  transition={{ duration: 0.5, delay: index * 0.1 }}
+                  initial={{ x: 0, opacity: 1 }}
+                  animate={{ x: 0, opacity: 1 }}
                 >
                   <div className="flex flex-wrap justify-between items-start mb-2 gap-2">
                     <h3 className="text-xl font-bold text-primary">{exp.title}</h3>
