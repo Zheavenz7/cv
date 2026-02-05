@@ -3,6 +3,21 @@ import { motion } from 'framer-motion';
 import useOnScreen from '@/hooks/useOnScreen';
 import resumeData from '@/data/resumeData';
 
+// Logo imports
+import vvcLogo from '@/assets/logos/vvc.png';
+import iqLogo from '@/assets/logos/investbotiq.png';
+import spontivaLogo from '@/assets/logos/spontiva.png';
+import wvLogo from '@/assets/logos/woningvrij.png';
+import djobbaLogo from '@/assets/logos/djobba.png';
+
+const projectLogos: Record<string, string> = {
+  "VVC": vvcLogo,
+  "Investbotiq": iqLogo,
+  "Spontiva": spontivaLogo,
+  "WoningVrij": wvLogo,
+  "DJOBBA": djobbaLogo
+};
+
 export default function ProjectsSection() {
   const sectionRef = useRef<HTMLDivElement>(null);
   const isVisible = useOnScreen(sectionRef);
@@ -22,63 +37,62 @@ export default function ProjectsSection() {
           ref={sectionRef}
           className={`section-content grid md:grid-cols-2 lg:grid-cols-3 gap-8 ${isVisible ? 'visible' : ''}`}
         >
-          {projects.map((project, index) => (
-            <motion.div 
-              key={index}
-              className="project-card bg-darkBg/60 backdrop-blur-sm rounded-xl overflow-hidden shadow-lg"
-              initial={{ y: 50, opacity: 0 }}
-              animate={isVisible ? { y: 0, opacity: 1 } : { y: 50, opacity: 0 }}
-              transition={{ duration: 0.5, delay: index * 0.1 }}
-            >
-              <div className="h-48 bg-gradient-to-br from-blue-800 to-blue-900 flex items-center justify-center">
-                <i className={`${getProjectIcon(project.title)} text-5xl text-blue-300 opacity-70`}></i>
-              </div>
-              <div className="p-6">
-                <h3 className="text-xl font-bold mb-2">{project.title}</h3>
-                <p className="text-gray-300 mb-4">{project.description}</p>
-                <div className="flex flex-wrap gap-2 mb-4">
-                  {project.technologies.map((tech, techIndex) => (
-                    <span key={techIndex} className="px-2 py-1 bg-primary/20 text-primary rounded text-xs">
-                      {tech}
-                    </span>
-                  ))}
-                </div>
-                <div className="flex justify-between">
-                  {project.demoLink && (
-                    <a href={project.demoLink} className="text-primary hover:text-primary-dark transition-colors">
-                      <i className="fas fa-external-link-alt mr-1"></i> Live Demo
-                    </a>
+          {projects.map((project, index) => {
+            const logo = projectLogos[project.title] || projectLogos[Object.keys(projectLogos).find(key => project.title.includes(key)) || ""];
+            
+            return (
+              <motion.div 
+                key={index}
+                className="bg-darkBgAlt/40 backdrop-blur-sm rounded-xl overflow-hidden border border-primary/10 hover:border-primary/30 transition-all duration-300 group"
+                initial={{ y: 50, opacity: 0 }}
+                animate={isVisible ? { y: 0, opacity: 1 } : { y: 50, opacity: 0 }}
+                transition={{ duration: 0.5, delay: index * 0.1 }}
+              >
+                <div className="h-48 overflow-hidden relative flex items-center justify-center bg-black/20">
+                  {logo ? (
+                    <div className="w-32 h-32 rounded-full border-4 border-primary/20 overflow-hidden bg-white flex items-center justify-center p-2 group-hover:border-primary/50 transition-colors duration-300">
+                      <img 
+                        src={logo} 
+                        alt={`${project.title} logo`} 
+                        className="max-w-full max-h-full object-contain"
+                      />
+                    </div>
+                  ) : (
+                    <div className="w-full h-full flex items-center justify-center bg-primary/5 text-primary/20">
+                      <i className="fas fa-project-diagram text-6xl"></i>
+                    </div>
                   )}
-                  {project.sourceLink && (
-                    <a href={project.sourceLink} className="text-primary hover:text-primary-dark transition-colors">
-                      <i className="fab fa-github mr-1"></i> Broncode
-                    </a>
-                  )}
+                  <div className="absolute inset-0 bg-primary/20 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center gap-4">
+                    {project.demoLink && (
+                      <a href={project.demoLink} target="_blank" rel="noopener noreferrer" className="p-2 bg-white text-darkBg rounded-full hover:bg-primary hover:text-white transition-colors">
+                        <i className="fas fa-external-link-alt"></i>
+                      </a>
+                    )}
+                    {project.sourceLink && (
+                      <a href={project.sourceLink} target="_blank" rel="noopener noreferrer" className="p-2 bg-white text-darkBg rounded-full hover:bg-primary hover:text-white transition-colors">
+                        <i className="fab fa-github"></i>
+                      </a>
+                    )}
+                  </div>
                 </div>
-              </div>
-            </motion.div>
-          ))}
+                <div className="p-6">
+                  <h3 className="text-xl font-bold mb-3 text-primary">{project.title}</h3>
+                  <p className="text-gray-400 mb-4 text-sm h-20 overflow-y-auto">
+                    {project.description}
+                  </p>
+                  <div className="flex flex-wrap gap-2">
+                    {project.technologies.map((tech, techIndex) => (
+                      <span key={techIndex} className="text-[10px] uppercase tracking-wider px-2 py-1 bg-primary/10 text-primary rounded">
+                        {tech}
+                      </span>
+                    ))}
+                  </div>
+                </div>
+              </motion.div>
+            );
+          })}
         </div>
       </div>
     </section>
   );
-}
-
-// Helper function to get appropriate icon based on project title
-function getProjectIcon(title: string): string {
-  if (title.toLowerCase().includes('financial') || title.toLowerCase().includes('dashboard')) {
-    return 'fas fa-chart-line';
-  } else if (title.toLowerCase().includes('mobile') || title.toLowerCase().includes('app')) {
-    return 'fas fa-mobile-alt';
-  } else if (title.toLowerCase().includes('audio')) {
-    return 'fas fa-volume-up';
-  } else if (title.toLowerCase().includes('commerce') || title.toLowerCase().includes('checkout')) {
-    return 'fas fa-shopping-cart';
-  } else if (title.toLowerCase().includes('3d') || title.toLowerCase().includes('web')) {
-    return 'fas fa-cube';
-  } else if (title.toLowerCase().includes('data') || title.toLowerCase().includes('visualization')) {
-    return 'fas fa-database';
-  } else {
-    return 'fas fa-code';
-  }
 }

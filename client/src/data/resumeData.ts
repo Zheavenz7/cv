@@ -247,44 +247,37 @@ const resumeData = {
   
   projects: [
     {
-      title: "Custom Financial Dashboard",
-      description: "Een uitgebreid financieel dashboard met rolgebaseerde toegang en realtime datavisualisatie, gekoppeld aan Google Sheets.",
-      technologies: ["React", "Supabase", "Tailwind", "Google Sheets"],
+      title: "VVC",
+      description: "Een innovatief platform gericht op zakelijke dienstverlening en consultancy.",
+      technologies: ["React", "TypeScript", "Tailwind"],
       demoLink: "#",
       sourceLink: "#"
     },
     {
-      title: "Mobiele App (Flutter + Firebase)",
-      description: "Een cross-platform mobiele applicatie met volledige authenticatie, realtime updates en bestandsuploads.",
-      technologies: ["Flutter", "Firebase", "iOS", "Android"],
+      title: "Investbotiq",
+      description: "Financieel dashboard en data-analyse platform voor investeringsstrategieën.",
+      technologies: ["React", "Supabase", "D3.js"],
       demoLink: "#",
       sourceLink: "#"
     },
     {
-      title: "Audio Creatie Tool",
-      description: "Een webgebaseerde tool voor audiomanipulatie met filters en golfvormvisualisatie.",
-      technologies: ["Web Audio API", "JavaScript", "Canvas", "React"],
+      title: "Spontiva",
+      description: "Full-stack applicatie voor sportmanagement en planning.",
+      technologies: ["React", "Node.js", "PostgreSQL"],
       demoLink: "#",
       sourceLink: "#"
     },
     {
-      title: "E-commerce Checkout Systeem",
-      description: "Een compleet afrekensysteem met integraties van meerdere betalingsproviders en e-mailnotificaties.",
-      technologies: ["Stripe", "Pay.nl", "Supabase", "Resend"],
+      title: "WoningVrij",
+      description: "Vastgoedplatform voor het vinden en beheren van woonruimte.",
+      technologies: ["React", "Vite", "Firebase"],
       demoLink: "#",
       sourceLink: "#"
     },
     {
-      title: "3D Web Landing Page",
-      description: "Een meeslepende 3D-landingspagina geoptimaliseerd voor zowel desktop als mobiele ervaringen.",
-      technologies: ["Three.js", "React", "WebGL", "GSAP"],
-      demoLink: "#",
-      sourceLink: "#"
-    },
-    {
-      title: "Data Visualisatie Dashboard",
-      description: "Interactieve datavisualisatie tools voor business intelligence en analytics.",
-      technologies: ["D3.js", "Vue.js", "GraphQL", "PostgreSQL"],
+      title: "DJOBBA",
+      description: "Snel werk, snel verdient! Een platform voor flexibele arbeidsbemiddeling.",
+      technologies: ["React", "Tailwind", "Express"],
       demoLink: "#",
       sourceLink: "#"
     }
