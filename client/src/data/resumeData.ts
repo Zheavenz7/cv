@@ -28,7 +28,7 @@ export interface Project {
 // Data extracted from the provided CV
 const resumeData = {
   personalInfo: {
-    name: "Jamal Hiwat Drenthe",
+    name: "Jamal Drenthe",
     title: "Senior Consultant | Full Stack Developer | Recht & Business Strategie",
     location: "Amsterdam, Nederland",
     email: "js.drenthe@gmail.com",
