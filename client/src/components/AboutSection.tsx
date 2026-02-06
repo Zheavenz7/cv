@@ -2,8 +2,10 @@ import { useRef } from 'react';
 import { motion } from 'framer-motion';
 import useOnScreen from '@/hooks/useOnScreen';
 import resumeData from '@/data/resumeData';
+import { useTranslation } from 'react-i18next';
 
 export default function AboutSection() {
+  const { t } = useTranslation();
   const sectionRef = useRef<HTMLDivElement>(null);
   const isVisible = useOnScreen(sectionRef);
   
@@ -14,7 +16,7 @@ export default function AboutSection() {
       <div className="container mx-auto px-4">
         <h2 className="text-3xl md:text-4xl font-bold font-montserrat text-center mb-16 relative overflow-hidden">
           <span className="relative z-10 inline-block px-4 py-2 after:absolute after:w-full after:h-1 after:bg-primary after:bottom-0 after:left-0">
-            Over Mij
+            {t('about.title')}
           </span>
         </h2>
         
@@ -29,12 +31,10 @@ export default function AboutSection() {
             transition={{ duration: 0.5 }}
           >
             <p className="text-lg">
-              Ik ben gevestigd in Amsterdam en ben beschikbaar voor werk over de hele wereld. 
-              Als een veelzijdige professional met ervaring in IT, Recht en Sales, specialiseer ik me in het leveren van volledig functionele applicaties, 
-              dashboards, automatiseringsflows en strategisch advies.
+              {t('about.description2')}
             </p>
             <p className="text-lg text-gray-400 italic">
-              "Ster in IT en Recht! Gediplomeerd in Communicatie, Marketing, Business & Sales!"
+              "{t('about.subtitle')} {t('about.description1')}"
             </p>
             <div className="flex flex-wrap gap-3 mt-8">
               {softSkills.map((skill, index) => (

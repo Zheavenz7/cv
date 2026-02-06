@@ -4,6 +4,7 @@ import { throttle } from '@/lib/utils';
 import resumeData from '@/data/resumeData';
 import { Link } from 'wouter';
 import profileImg from '@/assets/images/profile.jpg';
+import { useTranslation } from 'react-i18next';
 
 // Create a context for mouse position
 export const MouseContext = createContext<{x: number; y: number}>({ x: 0, y: 0 });
@@ -29,8 +30,9 @@ export function useMousePosition() {
 }
 
 export default function HeroSection() {
+  const { t } = useTranslation();
   const mousePosition = useMousePosition();
-  const { name, title, summary } = resumeData.personalInfo;
+  const { name } = resumeData.personalInfo;
   const [scrollY, setScrollY] = useState(0);
   const sectionRef = useRef<HTMLElement>(null);
   
@@ -117,7 +119,7 @@ export default function HeroSection() {
           animate={{ y: 0, opacity: 1 }}
           transition={{ delay: 0.3, duration: 0.5 }}
         >
-          {title}
+          {t('hero.title')}
         </motion.h2>
         
         <motion.p 
@@ -126,7 +128,7 @@ export default function HeroSection() {
           animate={{ y: 0, opacity: 1 }}
           transition={{ delay: 0.4, duration: 0.5 }}
         >
-          {summary}
+          {t('about.description2')}
         </motion.p>
         
         <motion.div 
@@ -136,10 +138,10 @@ export default function HeroSection() {
           transition={{ delay: 0.5, duration: 0.5 }}
         >
           <Link href="/contact" className="px-8 py-3 bg-primary text-darkBg font-bold rounded-lg transition-all duration-300 hover:bg-blue-600 focus:ring-4 focus:ring-blue-300 focus:outline-none">
-            Contact Me
+            {t('hero.contact')}
           </Link>
           <Link href="/projects" className="px-8 py-3 bg-transparent border border-primary text-primary font-medium rounded-lg transition-all duration-300 hover:bg-primary/10 focus:ring-4 focus:ring-blue-300 focus:outline-none">
-            View Projects
+            {t('hero.cta')}
           </Link>
         </motion.div>
         

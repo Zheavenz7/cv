@@ -1,10 +1,12 @@
 import { useState, useEffect, useRef } from 'react';
 import { Link, useLocation } from 'wouter';
+import { useTranslation } from 'react-i18next';
 import { cn } from '@/lib/utils';
 import { navigationItems } from '@/data/navigation';
 import { Button } from '@/components/ui/button';
 import { Menu, X, ChevronDown } from 'lucide-react';
 import { motion, AnimatePresence } from 'framer-motion';
+import jdLogo from '@/assets/logos/jd-logo.png';
 
 interface NavItemProps {
   item: {
@@ -167,14 +169,17 @@ const MobileNavItem = ({ item, onClose }: NavItemProps) => {
   
   return <NavLink item={item} isMobile onClick={onClose} />;
 };
-
-import jdLogo from '@/assets/logos/jd-logo.png';
-
 export default function NavBar() {
+  const { i18n } = useTranslation();
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
   const [isBlackAndWhite, setIsBlackAndWhite] = useState(false);
   const [location] = useLocation();
+
+  const toggleLanguage = () => {
+    const newLang = i18n.language === 'nl' ? 'en' : 'nl';
+    i18n.changeLanguage(newLang);
+  };
 
   useEffect(() => {
     if (isBlackAndWhite) {
@@ -232,49 +237,28 @@ export default function NavBar() {
   }, [isMenuOpen]);
 
   return (
-    <nav className={cn(
-<<<<<<< HEAD
-      'fixed top-0 left-0 right-0 z-50 transition-all duration-300',
-      scrolled 
-        ? 'bg-gray-900/95 backdrop-blur-md border-b border-white/10 shadow-xl py-2' 
-        : 'bg-gray-900/90 backdrop-blur-sm py-4'
-    )}>
-      <div className="container flex items-center justify-between h-16 px-4 mx-auto max-w-7xl">
-        {/* Logo */}
-        <Link 
-          href="/" 
-          className="text-2xl font-bold text-primary transition-colors hover:text-primary/90 flex items-center gap-2"
-          onClick={closeMenu}
-        >
-          <div className="w-8 h-8 bg-gradient-to-r from-primary to-accent rounded-full flex items-center justify-center">
-            <span className="text-white text-sm font-bold">JD</span>
-          </div>
-          Jamal Drenthe
-        </Link>
-
-        {/* Desktop Navigation */}
-        <div className="hidden lg:flex items-center space-x-1">
-          {navigationItems.map((item) => (
-            item.children ? (
-              <DesktopDropdown key={item.id} item={item} />
-            ) : (
-              <NavLink key={item.id} item={item} />
-            )
-=======
-      "fixed top-0 left-0 right-0 z-30 transition-all duration-500 will-change-transform",
-      scrolled ? "backdrop-blur-md bg-darkBg/80 shadow-lg py-2" : "bg-transparent py-4"
-    )}
-    style={{
-      transition: 'background-color 0.5s ease-out, padding 0.3s ease-out, backdrop-filter 0.5s ease-out, box-shadow 0.5s ease-out'
-    }}
+    <nav
+      className={cn(
+        "fixed top-0 left-0 right-0 z-30 transition-all duration-500 will-change-transform",
+        scrolled
+          ? "backdrop-blur-md bg-darkBg/80 shadow-lg py-2"
+          : "bg-transparent py-4"
+      )}
+      style={{
+        transition:
+          "background-color 0.5s ease-out, padding 0.3s ease-out, backdrop-filter 0.5s ease-out, box-shadow 0.5s ease-out",
+      }}
     >
       <div className="container mx-auto px-4 flex flex-wrap items-center justify-between">
         {/* Logo/Name */}
-        <Link href="/" className="flex items-center gap-2 group transition-all duration-300">
+        <Link
+          href="/"
+          className="flex items-center gap-2 group transition-all duration-300"
+        >
           <div className="relative w-10 h-10 md:w-12 md:h-12 overflow-hidden rounded-lg bg-white/5 border border-white/10 group-hover:border-primary/50 transition-all duration-300 shadow-inner">
-            <img 
-              src={jdLogo} 
-              alt="JD Logo" 
+            <img
+              src={jdLogo}
+              alt="JD Logo"
               className="w-full h-full object-contain filter brightness-100 contrast-125"
             />
           </div>
@@ -284,40 +268,39 @@ export default function NavBar() {
         </Link>
 
         {/* Mobile Menu Button */}
-        <button 
+        <button
           className="md:hidden text-white focus:outline-none focus:ring-2 focus:ring-primary rounded-md p-2"
           onClick={toggleMenu}
           aria-label="Toggle menu"
         >
-          <i className={`fas fa-${isMenuOpen ? 'times' : 'bars'} text-xl`}></i>
+          <i className={`fas fa-${isMenuOpen ? "times" : "bars"} text-xl`}></i>
         </button>
 
         {/* Navigation Links */}
-        <div 
+        <div
           className={cn(
             "md:flex items-center space-x-6",
-            isMenuOpen ? "flex flex-col absolute top-full left-0 right-0 bg-darkBgAlt p-4 space-y-4 md:static md:bg-transparent md:p-0 md:space-y-0" : "hidden md:flex"
+            isMenuOpen
+              ? "flex flex-col absolute top-full left-0 right-0 bg-darkBgAlt p-4 space-y-4 md:static md:bg-transparent md:p-0 md:space-y-0"
+              : "hidden md:flex"
           )}
         >
-          {[
-            { id: 'home', label: 'Home' },
-            { id: 'about', label: 'Over Mij' },
-            { id: 'projects', label: 'Projecten' },
-            { id: 'contact', label: 'Contact' }
-          ].map(item => (
-            <Link 
-              key={item.id}
-              href={item.id === 'home' ? '/' : `/${item.id}`}
-              className={cn(
-                "navbar-link py-1 px-2 transition-colors duration-300 hover:text-primary cursor-pointer",
-                location === (item.id === 'home' ? '/' : `/${item.id}`) ? "text-primary font-semibold" : "text-white"
-              )}
-              onClick={closeMenu}
-            >
-              {item.label}
-            </Link>
->>>>>>> 1cb19f9 (Update website content and navigation to reflect professional profile and Dutch language)
-          ))}
+          {navigationItems.map((item) =>
+            item.children ? (
+              <DesktopDropdown key={item.id} item={item} />
+            ) : (
+              <NavLink key={item.id} item={item} />
+            )
+          )}
+
+          <button
+            onClick={toggleLanguage}
+            className="px-3 py-1 rounded-md bg-white/10 hover:bg-white/20 transition-colors text-white text-xs font-bold uppercase tracking-wider"
+            aria-label="Toggle language"
+          >
+            {i18n.language === "nl" ? "EN" : "NL"}
+          </button>
+
           <button
             onClick={toggleTheme}
             className="ml-2 p-2 rounded-full hover:bg-white/10 transition-colors text-white"
@@ -367,6 +350,21 @@ export default function NavBar() {
               {navigationItems.map((item) => (
                 <MobileNavItem key={item.id} item={item} onClose={closeMenu} />
               ))}
+              <button
+                onClick={() => {
+                  toggleLanguage();
+                  closeMenu();
+                }}
+                className="w-full flex items-center justify-center gap-2 px-4 py-3 rounded-lg bg-white/5 text-white hover:bg-white/10 transition-colors"
+                aria-label="Toggle language"
+              >
+                <i className="fas fa-globe"></i>
+                <span className="text-sm font-medium">
+                  {i18n.language === "nl"
+                    ? "Switch to English"
+                    : "Wissel naar Nederlands"}
+                </span>
+              </button>
               <button
                 onClick={() => {
                   toggleTheme();

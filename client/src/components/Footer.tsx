@@ -1,6 +1,8 @@
 import { motion } from 'framer-motion';
+import { useTranslation } from 'react-i18next';
 
 export default function Footer() {
+  const { t } = useTranslation();
   const currentYear = new Date().getFullYear();
   
   return (
@@ -14,9 +16,9 @@ export default function Footer() {
         >
           <p>&copy; {currentYear} Jamal Drenthe</p>
           <span className="hidden md:block text-primary">•</span>
-          <p>Alle rechten voorbehouden</p>
+          <p>{t('footer.rights')}</p>
           <span className="hidden md:block text-primary">•</span>
-          <p className="text-sm">Senior Consultant | Full Stack Developer | Recht & Strategie</p>
+          <p className="text-sm">{t('footer.description')}</p>
         </motion.div>
         
         <motion.div 
