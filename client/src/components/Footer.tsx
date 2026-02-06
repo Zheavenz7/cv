@@ -12,7 +12,7 @@ export default function Footer() {
           animate={{ opacity: 1 }}
           transition={{ duration: 0.5 }}
         >
-          <p>&copy; {currentYear} Jamal Hiwat Drenthe</p>
+          <p>&copy; {currentYear} Jamal Drenthe</p>
           <span className="hidden md:block text-primary">•</span>
           <p>Alle rechten voorbehouden</p>
           <span className="hidden md:block text-primary">•</span>

@@ -6,7 +6,7 @@ import { Badge } from "@/components/ui/badge";
 
 export default function Projects() {
   useEffect(() => {
-    document.title = 'Projecten | Jamal Hiwat Drenthe';
+    document.title = 'Projecten | Jamal Drenthe';
   }, []);
 
   const mainProjects = [

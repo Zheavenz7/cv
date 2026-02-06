@@ -5,7 +5,7 @@ import { Mail, Phone, MapPin, Send } from "lucide-react";
 
 export default function Contact() {
   useEffect(() => {
-    document.title = 'Contact | Jamal Hiwat Drenthe';
+    document.title = 'Contact | Jamal Drenthe';
   }, []);
 
   return (

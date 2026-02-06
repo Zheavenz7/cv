@@ -4,7 +4,7 @@ import Footer from "@/components/Footer";
 
 export default function About() {
   useEffect(() => {
-    document.title = 'Over Mij | Jamal Hiwat Drenthe';
+    document.title = 'Over Mij | Jamal Drenthe';
   }, []);
 
   return (
@@ -15,7 +15,7 @@ export default function About() {
         
         <div className="grid grid-cols-1 md:grid-cols-2 gap-12 items-center mb-16">
           <div className="space-y-6">
-            <h2 className="text-2xl font-semibold text-primary">Jamal Hiwat Drenthe</h2>
+            <h2 className="text-2xl font-semibold text-primary">Jamal Drenthe</h2>
             <p className="text-lg leading-relaxed text-gray-300">
               Ster in IT en Recht! Gediplomeerd in Communicatie, Marketing, Business & Sales.
             </p>

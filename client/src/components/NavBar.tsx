@@ -168,6 +168,8 @@ const MobileNavItem = ({ item, onClose }: NavItemProps) => {
   return <NavLink item={item} isMobile onClick={onClose} />;
 };
 
+import jdLogo from '@/assets/logos/jd-logo.png';
+
 export default function NavBar() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
@@ -268,8 +270,17 @@ export default function NavBar() {
     >
       <div className="container mx-auto px-4 flex flex-wrap items-center justify-between">
         {/* Logo/Name */}
-        <Link href="/" className="text-2xl font-bold font-montserrat tracking-wide text-primary">
-          Jamal Hiwat Drenthe
+        <Link href="/" className="flex items-center gap-2 group transition-all duration-300">
+          <div className="relative w-10 h-10 md:w-12 md:h-12 overflow-hidden rounded-lg bg-white/5 border border-white/10 group-hover:border-primary/50 transition-all duration-300 shadow-inner">
+            <img 
+              src={jdLogo} 
+              alt="JD Logo" 
+              className="w-full h-full object-contain filter brightness-100 contrast-125"
+            />
+          </div>
+          <span className="hidden sm:inline-block text-xl font-bold font-montserrat tracking-tight text-white group-hover:text-primary transition-colors duration-300">
+            Jamal Drenthe
+          </span>
         </Link>
 
         {/* Mobile Menu Button */}

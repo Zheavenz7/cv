@@ -12,7 +12,7 @@ import ScrollToTopButton from "@/components/ScrollToTopButton";
 
 export default function Home() {
   useEffect(() => {
-    document.title = 'Jamal Hiwat Drenthe | Portfolio';
+    document.title = 'Jamal Drenthe | Portfolio';
   }, []);
 
   return (
