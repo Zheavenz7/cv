@@ -20,7 +20,7 @@ const resources = {
         title: "Over Mij",
         subtitle: "Ster in IT en Recht!",
         description1: "Gediplomeerd in Communicatie, Marketing, Business & Sales.",
-        description2: "Ik ben een analytisch ingestelde professional met ervaring op het snijvlak van technologie, strategie en communicatie. Ik werk systematisch, denk risico-bewust en ben sterk in het vertalen van complexe informatie naar duidelijke, toepasbare oplossingen. Door mijn achtergrond in IT, cybersecurity, sales en marketing begrijp ik zowel de technische als de commerciële belangen binnen een organisatie. Ik werk nauwkeurig, ben onderzoekend ingesteld en kan snel schakelen tussen inhoud, proces en uitvoering. Mijn focus ligt op betrouwbaarheid, structuur en het creëren van duurzame waarde in elke omgeving waarin ik werk.",
+        description2: "Ik ben een gepassioneerde Full Stack Developer met een unieke achtergrond in Recht en Marketing. Mijn aanpak combineert technische precisie met een diep begrip van zakelijke behoeften en juridische kaders.",
         education: "Opleiding"
       },
       projects: {
@@ -69,7 +69,7 @@ const resources = {
         title: "About Me",
         subtitle: "Star in IT and Law!",
         description1: "Degree in Communication, Marketing, Business & Sales.",
-        description2: "I am an analytically-minded professional with experience at the intersection of technology, strategy, and communication. I work systematically, think risk-consciously, and excel at translating complex information into clear, applicable solutions. With my background in IT, cybersecurity, sales, and marketing, I understand both the technical and commercial interests within an organization. I work accurately, have an investigative mindset, and can quickly switch between content, process, and execution. My focus is on reliability, structure, and creating sustainable value in every environment in which I work.",
+        description2: "I am a passionate Full Stack Developer with a unique background in Law and Marketing. My approach combines technical precision with a deep understanding of business needs and legal frameworks.",
         education: "Education"
       },
       projects: {
