@@ -1,6 +1,4 @@
 import { useEffect } from "react";
-import NavBar from "@/components/NavBar";
-import InteractiveBackground from "@/components/InteractiveBackground";
 import HeroSection from "@/components/HeroSection";
 import AboutSection from "@/components/AboutSection";
 import SkillsSection from "@/components/SkillsSection";
@@ -16,19 +14,15 @@ export default function Home() {
   }, []);
 
   return (
-    <div className="relative min-h-screen bg-darkBg text-white overflow-x-hidden selection:bg-primary selection:text-darkBg">
-      <InteractiveBackground />
-      <NavBar />
-      <main className="relative z-10">
-        <HeroSection />
-        <AboutSection />
-        <SkillsSection />
-        <ExperienceSection />
-        <ProjectsSection />
-        <ContactSection />
-      </main>
+    <>
+      <HeroSection />
+      <AboutSection />
+      <SkillsSection />
+      <ExperienceSection />
+      <ProjectsSection />
+      <ContactSection />
       <Footer />
       <ScrollToTopButton />
-    </div>
+    </>
   );
 }

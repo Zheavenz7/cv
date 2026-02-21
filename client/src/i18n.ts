@@ -12,15 +12,18 @@ const resources = {
         contact: "Contact"
       },
       hero: {
-        title: "Senior Consultant | Full Stack Developer | Recht & Business Strategie",
+        title: "AI-native MVP Engineer / Architect / Developer",
+        subtitle: "Ik ontwerp en bouw complete producten van idee tot werkende realiteit.",
+        description: "Voor startups en founders vertaal ik concepten naar launch-klare MVP's, schaalbare platformen en geautomatiseerde businesssystemen.",
         cta: "Bekijk Mijn Werk",
         contact: "Neem Contact Op"
       },
       about: {
         title: "Over Mij",
-        subtitle: "Ster in IT en Recht!",
-        description1: "Gediplomeerd in Communicatie, Marketing, Business & Sales.",
-        description2: "Ik ben een gepassioneerde Full Stack Developer met een unieke achtergrond in Recht en Marketing. Mijn aanpak combineert technische precisie met een diep begrip van zakelijke behoeften en juridische kaders.",
+        subtitle: "Van strategie en design tot engineering, AI, data en groei — alles end-to-end.",
+        description1: "Geen losse freelancers of overdrachten, maar één architect die het geheel overziet én bouwt.",
+        description2: "Door mijn multidisciplinaire aanpak kan ik snel schakelen tussen creatie, technologie en strategie, en zo ideeën in weken omzetten naar echte producten.",
+        skillsIntro: "Hieronder vind je de tools, technologieën en systemen waarmee ik dagelijks werk.",
         education: "Opleiding"
       },
       projects: {
@@ -48,7 +51,7 @@ const resources = {
       },
       footer: {
         rights: "Alle rechten voorbehouden",
-        description: "Senior Consultant | Full Stack Developer | Recht & Strategie"
+        description: "AI-native MVP Engineer / Architect / Developer"
       }
     }
   },
@@ -61,15 +64,18 @@ const resources = {
         contact: "Contact"
       },
       hero: {
-        title: "Senior Consultant | Full Stack Developer | Legal & Business Strategy",
+        title: "AI-native MVP Engineer / Architect / Developer",
+        subtitle: "I design and build complete products from idea to working reality.",
+        description: "For startups and founders, I translate concepts into launch-ready MVPs, scalable platforms, and automated business systems.",
         cta: "View My Work",
         contact: "Get In Touch"
       },
       about: {
         title: "About Me",
-        subtitle: "Star in IT and Law!",
-        description1: "Degree in Communication, Marketing, Business & Sales.",
-        description2: "I am a passionate Full Stack Developer with a unique background in Law and Marketing. My approach combines technical precision with a deep understanding of business needs and legal frameworks.",
+        subtitle: "From strategy and design to engineering, AI, data, and growth — everything end-to-end.",
+        description1: "No loose freelancers or handoffs, but one architect who oversees and builds the whole thing.",
+        description2: "Through my multidisciplinary approach, I can quickly switch between creation, technology, and strategy, turning ideas into real products in weeks.",
+        skillsIntro: "Below you'll find the tools, technologies, and systems I work with daily.",
         education: "Education"
       },
       projects: {
@@ -97,7 +103,7 @@ const resources = {
       },
       footer: {
         rights: "All rights reserved",
-        description: "Senior Consultant | Full Stack Developer | Legal & Strategy"
+        description: "AI-native MVP Engineer / Architect / Developer"
       }
     }
   }

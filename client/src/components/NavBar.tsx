@@ -1,11 +1,11 @@
 import { useState, useEffect, useRef } from 'react';
 import { Link, useLocation } from 'wouter';
+import { motion, AnimatePresence } from 'framer-motion';
 import { useTranslation } from 'react-i18next';
 import { cn } from '@/lib/utils';
 import { navigationItems } from '@/data/navigation';
 import { Button } from '@/components/ui/button';
 import { Menu, X, ChevronDown } from 'lucide-react';
-import { motion, AnimatePresence } from 'framer-motion';
 import jdLogo from '@/assets/logos/jd-logo.png';
 
 interface NavItemProps {
@@ -169,16 +169,22 @@ const MobileNavItem = ({ item, onClose }: NavItemProps) => {
   
   return <NavLink item={item} isMobile onClick={onClose} />;
 };
-export default function NavBar() {
+
+export default function NavBar({ onSearchOpen }: { onSearchOpen?: () => void }) {
   const { i18n } = useTranslation();
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
+  const [scrollProgress, setScrollProgress] = useState(0);
   const [isBlackAndWhite, setIsBlackAndWhite] = useState(false);
   const [location] = useLocation();
 
   const toggleLanguage = () => {
     const newLang = i18n.language === 'nl' ? 'en' : 'nl';
     i18n.changeLanguage(newLang);
+  };
+
+  const toggleTheme = () => {
+    setIsBlackAndWhite((prev) => !prev);
   };
 
   useEffect(() => {
@@ -189,99 +195,71 @@ export default function NavBar() {
     }
   }, [isBlackAndWhite]);
 
-  const toggleTheme = () => setIsBlackAndWhite(!isBlackAndWhite);
-  
   const toggleMenu = () => {
     setIsMenuOpen(!isMenuOpen);
   };
-  
+
   const closeMenu = () => {
     setIsMenuOpen(false);
   };
-  
+
   useEffect(() => {
     const handleScroll = () => {
-      // Update scrolled state for navbar background with smoother transition
       if (window.scrollY > 200) {
         setScrolled(true);
       } else {
         setScrolled(false);
       }
+      const totalHeight = document.documentElement.scrollHeight - window.innerHeight;
+      setScrollProgress(totalHeight > 0 ? window.scrollY / totalHeight : 0);
     };
-    
+
     window.addEventListener('scroll', handleScroll);
     handleScroll();
-    
+
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
-  
+
   useEffect(() => {
     closeMenu();
   }, [location]);
-
-  // Close menu when clicking outside on mobile
-  useEffect(() => {
-    const handleClickOutside = (event: MouseEvent) => {
-      if (isMenuOpen) {
-        closeMenu();
-      }
-    };
-
-    if (isMenuOpen) {
-      document.addEventListener('click', handleClickOutside);
-    }
-
-    return () => {
-      document.removeEventListener('click', handleClickOutside);
-    };
-  }, [isMenuOpen]);
 
   return (
     <nav
       className={cn(
         "fixed top-0 left-0 right-0 z-30 transition-all duration-500 will-change-transform",
         scrolled
-          ? "backdrop-blur-md bg-darkBg/80 shadow-lg py-2"
+          ? "backdrop-blur-2xl bg-darkBg/60 shadow-lg shadow-black/10 border-b border-white/[0.06] py-2"
           : "bg-transparent py-4"
       )}
-      style={{
-        transition:
-          "background-color 0.5s ease-out, padding 0.3s ease-out, backdrop-filter 0.5s ease-out, box-shadow 0.5s ease-out",
-      }}
     >
       <div className="container mx-auto px-4 flex flex-wrap items-center justify-between">
-        {/* Logo/Name */}
-        <Link
-          href="/"
-          className="flex items-center gap-2 group transition-all duration-300"
-        >
-          <div className="relative w-10 h-10 md:w-12 md:h-12 overflow-hidden rounded-lg bg-white/5 border border-white/10 group-hover:border-primary/50 transition-all duration-300 shadow-inner">
+        {/* Logo */}
+        <Link href="/" className="flex items-center gap-2 group transition-all duration-300">
+          <div className="relative w-10 h-10 md:w-11 md:h-11 overflow-hidden rounded-xl bg-white/[0.06] border border-white/[0.1] group-hover:border-primary/40 group-hover:bg-white/[0.1] transition-all duration-300">
             <img
               src={jdLogo}
               alt="JD Logo"
               className="w-full h-full object-contain filter brightness-100 contrast-125"
             />
           </div>
-          <span className="hidden sm:inline-block text-xl font-bold font-montserrat tracking-tight text-white group-hover:text-primary transition-colors duration-300">
-            Jamal Drenthe
-          </span>
         </Link>
 
         {/* Mobile Menu Button */}
         <button
-          className="md:hidden text-white focus:outline-none focus:ring-2 focus:ring-primary rounded-md p-2"
+          className="md:hidden text-white/80 hover:text-white focus:outline-none rounded-xl p-2.5 hover:bg-white/[0.06] transition-colors"
           onClick={toggleMenu}
           aria-label="Toggle menu"
         >
-          <i className={`fas fa-${isMenuOpen ? "times" : "bars"} text-xl`}></i>
+          <i className={`fas fa-${isMenuOpen ? 'times' : 'bars'} text-lg`}></i>
         </button>
 
         {/* Navigation Links */}
         <div
           className={cn(
-            "md:flex items-center space-x-6",
+            "md:flex items-center gap-1",
             isMenuOpen
-              ? "flex flex-col absolute top-full left-0 right-0 bg-darkBgAlt p-4 space-y-4 md:static md:bg-transparent md:p-0 md:space-y-0"
+              ? "flex flex-col absolute top-full left-4 right-4 mt-2 glass-strong rounded-2xl p-3 space-y-1 md:static md:bg-transparent md:backdrop-blur-none md:border-0 md:shadow-none md:p-0 md:space-y-0 md:rounded-none"
               : "hidden md:flex"
           )}
         >
@@ -293,25 +271,41 @@ export default function NavBar() {
             )
           )}
 
-          <button
-            onClick={toggleLanguage}
-            className="px-3 py-1 rounded-md bg-white/10 hover:bg-white/20 transition-colors text-white text-xs font-bold uppercase tracking-wider"
-            aria-label="Toggle language"
-          >
-            {i18n.language === "nl" ? "EN" : "NL"}
-          </button>
-
-          <button
-            onClick={toggleTheme}
-            className="ml-2 p-2 rounded-full hover:bg-white/10 transition-colors text-white"
-            aria-label="Toggle theme"
-          >
-            {isBlackAndWhite ? (
-              <i className="fas fa-palette"></i>
-            ) : (
-              <i className="fas fa-ghost"></i>
+          <div className="flex items-center gap-1 md:ml-2 md:pl-2 md:border-l md:border-white/[0.08]">
+            {onSearchOpen && (
+              <button
+                onClick={onSearchOpen}
+                className="flex items-center gap-2 px-3 py-2 rounded-xl bg-white/[0.04] border border-white/[0.06] hover:bg-white/[0.08] hover:border-white/[0.12] transition-all duration-200 text-gray-400 hover:text-white"
+                aria-label="Search"
+              >
+                <i className="fas fa-search text-xs"></i>
+                <span className="hidden lg:inline text-xs text-gray-500">Zoeken</span>
+                <kbd className="hidden lg:inline-flex items-center px-1.5 py-0.5 rounded bg-white/[0.06] border border-white/[0.08] text-[9px] text-gray-600 font-mono ml-1">
+                  ⌘K
+                </kbd>
+              </button>
             )}
-          </button>
+
+            <button
+              onClick={toggleLanguage}
+              className="px-3 py-2 rounded-xl bg-white/[0.06] hover:bg-white/[0.1] transition-all duration-200 text-gray-300 hover:text-white text-xs font-bold uppercase tracking-wider"
+              aria-label="Toggle language"
+            >
+              {i18n.language === 'nl' ? 'EN' : 'NL'}
+            </button>
+
+            <button
+              onClick={toggleTheme}
+              className="p-2 rounded-xl hover:bg-white/[0.06] transition-all duration-200 text-gray-400 hover:text-white"
+              aria-label="Toggle theme"
+            >
+              {isBlackAndWhite ? (
+                <i className="fas fa-palette text-sm"></i>
+              ) : (
+                <i className="fas fa-ghost text-sm"></i>
+              )}
+            </button>
+          </div>
         </div>
 
         {/* Mobile menu button */}
@@ -384,6 +378,13 @@ export default function NavBar() {
           </motion.div>
         )}
       </AnimatePresence>
+
+      {/* Scroll Progress Bar */}
+      <motion.div
+        className="absolute bottom-0 left-0 h-[2px] bg-gradient-to-r from-primary via-blue-400 to-primary"
+        style={{ width: `${scrollProgress * 100}%` }}
+        transition={{ duration: 0.05 }}
+      />
     </nav>
   );
 }
