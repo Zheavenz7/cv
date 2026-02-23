@@ -23,26 +23,7 @@ export default function About() {
               <p className="text-lg text-white leading-relaxed">
                 Mijn onderscheidend vermogen zit in mijn manier van denken. Ik kijk niet alleen naar wat zichtbaar is, maar analyseer wat eronder ligt. Patronen, structuren, gedragingen en kansen die anderen over het hoofd zien, zijn voor mij het startpunt.
               </p>
-              <div className="space-y-4 text-white/90 leading-relaxed">
-                <p className="text-sm uppercase tracking-[0.2em] text-primary font-semibold">Kernwaarden</p>
-                <div className="grid grid-cols-1 sm:grid-cols-3 gap-3">
-                  {[{
-                    title: 'Diepgang boven oppervlakkigheid',
-                    body: 'Ik stel scherpe vragen en neem geen genoegen met halve antwoorden. Beslissingen moeten gefundeerd zijn, niet impulsief.'
-                  }, {
-                    title: 'Verantwoordelijkheid boven excuses',
-                    body: 'Ik neem eigenaarschap. Resultaat is geen toeval, maar het gevolg van bewuste keuzes en consistent handelen.'
-                  }, {
-                    title: 'Lange termijn boven snelle winst',
-                    body: 'Ik bouw liever iets dat blijft, dan iets dat snel piekt en weer verdwijnt. Duurzame waarde is voor mij leidend.'
-                  }].map((item) => (
-                    <div key={item.title} className="glass rounded-2xl p-4 border border-white/10 shadow-md shadow-primary/5 h-full">
-                      <p className="font-semibold text-white mb-1.5">{item.title}</p>
-                      <p className="text-white/80 text-sm leading-relaxed">{item.body}</p>
-                    </div>
-                  ))}
-                </div>
-              </div>
+              {/* Kernwaarden sectie verwijderd op verzoek */}
 
               <div className="space-y-3 text-white/85 leading-relaxed">
                 <p>Wat mij echt onderscheidt, is dat ik zowel het grote plaatje zie als de details beheers. Ik schakel moeiteloos tussen visie en uitvoering. Tussen strategie en actie.</p>

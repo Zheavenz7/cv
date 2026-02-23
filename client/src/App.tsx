@@ -14,6 +14,7 @@ import About from "@/pages/About";
 import Projects from "@/pages/Projects";
 import Contact from "@/pages/Contact";
 import CV from "@/pages/CV";
+import Services from "@/pages/Services";
 import NotFound from "@/pages/not-found";
 
 // CV Pages

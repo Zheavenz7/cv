@@ -1,4 +1,4 @@
-import { useEffect } from 'react';
+import { Fragment, useEffect, useState } from 'react';
 import Footer from "@/components/Footer";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
@@ -28,7 +28,36 @@ const copyOverrides: Record<string, string> = {
   'Angels Mediate': 'Digitale mediation-omgeving met dossiers, afspraken en veilige communicatie.',
 };
 
+const vvcSubProjects = [
+  {
+    name: 'Website',
+    url: 'https://verdienendevrienden.club',
+    repo: 'https://github.com/JamalDrenthe/vvc-webapp',
+    description: 'Hoofdwebsite voor VVC consultancy platform'
+  },
+  {
+    name: 'Pitch',
+    url: 'https://pitch.verdienendevrienden.club',
+    repo: 'https://github.com/JamalDrenthe/vvc-pitch-tool',
+    description: 'Interactive pitch tool voor cliënten'
+  },
+  {
+    name: 'Onboarding',
+    url: 'https://onboarding.verdienendevrienden.club',
+    repo: 'https://github.com/JamalDrenthe/vvc-onboarding',
+    description: 'Gebruikers onboarding flow'
+  },
+  {
+    name: 'Login',
+    url: 'https://login.verdienendevrienden.club',
+    repo: 'https://github.com/JamalDrenthe/vvc-login',
+    description: 'Authenticatie en login systeem'
+  }
+];
+
 export default function Projects() {
+  const [expandedVVC, setExpandedVVC] = useState<string | null>(null);
+
   useEffect(() => {
     document.title = 'Projecten | Jamal Drenthe';
   }, []);
@@ -48,14 +77,15 @@ export default function Projects() {
           </div>
 
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-7">
-            {projects.map((project, idx) => {
+            {projects.map((project) => {
               const logo = projectLogos[project.title];
               const description = copyOverrides[project.title] ?? project.description;
               const hasDemo = Boolean(project.demoLink);
               const hasSource = Boolean(project.sourceLink);
 
               return (
-                <Card key={idx} className="glass rounded-2xl border border-white/10 hover:border-primary/50 hover:shadow-xl hover:shadow-primary/15 transition-all duration-300 overflow-hidden backdrop-blur-2xl bg-black/40">
+                <Fragment key={project.title}>
+                  <Card className="glass rounded-2xl border border-white/10 hover:border-primary/50 hover:shadow-xl hover:shadow-primary/15 transition-all duration-300 overflow-hidden backdrop-blur-2xl bg-black/40">
                   <div className="h-48 relative flex items-center justify-center bg-gradient-to-br from-black/70 via-primary/20 to-black/60">
                     <div className="absolute inset-0 opacity-60 blur-3xl bg-gradient-conic from-primary/25 via-white/10 to-primary/10" />
                     {logo ? (
@@ -68,15 +98,27 @@ export default function Projects() {
                       </div>
                     )}
                     <div className="absolute inset-0 bg-black/65 backdrop-blur-sm opacity-0 hover:opacity-100 transition-all duration-300 flex items-center justify-center gap-3">
-                      {hasDemo && (
-                        <a href={project.demoLink} target="_blank" rel="noopener noreferrer" className="w-11 h-11 rounded-xl bg-white/[0.1] border border-white/[0.25] flex items-center justify-center text-white hover:bg-primary hover:border-primary transition-all duration-200" aria-label={`Visit ${project.title}`}>
-                          <i className="fas fa-external-link-alt text-sm"></i>
-                        </a>
-                      )}
-                      {hasSource && (
-                        <a href={project.sourceLink} target="_blank" rel="noopener noreferrer" className="w-11 h-11 rounded-xl bg-white/[0.1] border border-white/[0.25] flex items-center justify-center text-white hover:bg-primary hover:border-primary transition-all duration-200" aria-label={`Source code for ${project.title}`}>
-                          <i className="fab fa-github text-sm"></i>
-                        </a>
+                      {project.title === 'VVC' ? (
+                        <button
+                          onClick={() => setExpandedVVC(expandedVVC === 'vvc-main' ? null : 'vvc-main')}
+                          className="w-11 h-11 rounded-xl bg-white/[0.1] border border-white/[0.25] flex items-center justify-center text-white hover:bg-primary hover:border-primary transition-all duration-200"
+                          aria-label="VVC subprojects"
+                        >
+                          <i className="fas fa-th text-sm"></i>
+                        </button>
+                      ) : (
+                        <>
+                          {hasDemo && (
+                            <a href={project.demoLink} target="_blank" rel="noopener noreferrer" className="w-11 h-11 rounded-xl bg-white/[0.1] border border-white/[0.25] flex items-center justify-center text-white hover:bg-primary hover:border-primary transition-all duration-200" aria-label={`Visit ${project.title}`}>
+                              <i className="fas fa-external-link-alt text-sm"></i>
+                            </a>
+                          )}
+                          {hasSource && (
+                            <a href={project.sourceLink} target="_blank" rel="noopener noreferrer" className="w-11 h-11 rounded-xl bg-white/[0.1] border border-white/[0.25] flex items-center justify-center text-white hover:bg-primary hover:border-primary transition-all duration-200" aria-label={`Source code for ${project.title}`}>
+                              <i className="fab fa-github text-sm"></i>
+                            </a>
+                          )}
+                        </>
                       )}
                     </div>
                   </div>
@@ -102,16 +144,88 @@ export default function Projects() {
                     </div>
                     {(hasDemo || hasSource) && (
                       <div className="flex gap-2">
-                        {hasDemo && (
-                          <a href={project.demoLink} target="_blank" rel="noopener noreferrer" className="px-3 py-2 text-xs rounded-lg bg-primary/15 border border-primary/40 text-primary hover:bg-primary hover:text-black transition-all">Live</a>
-                        )}
-                        {hasSource && (
-                          <a href={project.sourceLink} target="_blank" rel="noopener noreferrer" className="px-3 py-2 text-xs rounded-lg bg-white/[0.06] border border-white/25 text-white hover:bg-white hover:text-black transition-all">Code</a>
+                        {project.title === 'VVC' ? (
+                          <button
+                            onClick={() => setExpandedVVC(expandedVVC === 'vvc-main' ? null : 'vvc-main')}
+                            className="px-3 py-2 text-xs rounded-lg bg-primary/15 border border-primary/40 text-primary hover:bg-primary hover:text-black transition-all"
+                          >
+                            Subprojects
+                          </button>
+                        ) : (
+                          <>
+                            {hasDemo && (
+                              <a href={project.demoLink} target="_blank" rel="noopener noreferrer" className="px-3 py-2 text-xs rounded-lg bg-primary/15 border border-primary/40 text-primary hover:bg-primary hover:text-black transition-all">Live</a>
+                            )}
+                            {hasSource && (
+                              <a href={project.sourceLink} target="_blank" rel="noopener noreferrer" className="px-3 py-2 text-xs rounded-lg bg-white/[0.06] border border-white/25 text-white hover:bg-white hover:text-black transition-all">Code</a>
+                            )}
+                          </>
                         )}
                       </div>
                     )}
                   </CardContent>
                 </Card>
+                
+                {/* VVC Subprojects Overlay */}
+                {project.title === 'VVC' && expandedVVC === 'vvc-main' && (
+                  <div className="fixed inset-0 bg-black/80 backdrop-blur-sm z-50 flex items-center justify-center p-4" onClick={() => setExpandedVVC(null)}>
+                    <div className="bg-black/90 rounded-2xl border border-white/10 p-6 max-w-4xl w-full max-h-[90vh] overflow-y-auto" onClick={(e) => e.stopPropagation()}>
+                      <div className="flex items-center justify-between mb-6">
+                        <div className="flex items-center gap-3">
+                          <div className="w-12 h-12 rounded-xl overflow-hidden bg-white/90 flex items-center justify-center p-2 shadow-lg shadow-primary/15 ring-4 ring-white/10">
+                            <img src={vvcLogo} alt="VVC logo" className="max-w-full max-h-full object-contain" />
+                          </div>
+                          <div>
+                            <h2 className="text-2xl font-bold text-white">VVC Subprojects</h2>
+                            <p className="text-white/70">Consultancy OS: intake tot facturatie in één flow</p>
+                          </div>
+                        </div>
+                        <button
+                          onClick={() => setExpandedVVC(null)}
+                          className="w-10 h-10 rounded-xl bg-white/[0.1] border border-white/[0.25] flex items-center justify-center text-white hover:bg-red-500 hover:border-red-500 transition-all duration-200"
+                          aria-label="Close"
+                        >
+                          <i className="fas fa-times text-sm"></i>
+                        </button>
+                      </div>
+                      
+                      <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                        {vvcSubProjects.map((subProject, idx) => (
+                          <div key={idx} className="bg-black/40 rounded-xl border border-white/10 p-4 hover:border-primary/50 transition-all duration-300">
+                            <div className="flex items-center justify-between mb-3">
+                              <h3 className="text-lg font-semibold text-white">{subProject.name}</h3>
+                              <Badge variant="outline" className="text-[10px] uppercase tracking-[0.12em] border-primary/40 text-primary bg-primary/10">
+                                {subProject.name}
+                              </Badge>
+                            </div>
+                            <p className="text-white/80 text-sm mb-4">{subProject.description}</p>
+                            <div className="flex gap-2">
+                              <a
+                                href={subProject.url}
+                                target="_blank"
+                                rel="noopener noreferrer"
+                                className="px-3 py-1.5 text-xs rounded-lg bg-primary/15 border border-primary/40 text-primary hover:bg-primary hover:text-black transition-all flex items-center gap-1"
+                              >
+                                <i className="fas fa-external-link-alt text-[10px]"></i>
+                                Live
+                              </a>
+                              <a
+                                href={subProject.repo}
+                                target="_blank"
+                                rel="noopener noreferrer"
+                                className="px-3 py-1.5 text-xs rounded-lg bg-white/[0.06] border border-white/25 text-white hover:bg-white hover:text-black transition-all flex items-center gap-1"
+                              >
+                                <i className="fab fa-github text-[10px]"></i>
+                                Code
+                              </a>
+                            </div>
+                          </div>
+                        ))}
+                      </div>
+                    </div>
+                  </div>
+                )}
+                </Fragment>
               );
             })}
           </div>

@@ -270,7 +270,6 @@ export default function NavBar({ onSearchOpen }: { onSearchOpen?: () => void }) 
               <NavLink key={item.id} item={item} />
             )
           )}
-
           <div className="flex items-center gap-1 md:ml-2 md:pl-2 md:border-l md:border-white/[0.08]">
             {onSearchOpen && (
               <button
