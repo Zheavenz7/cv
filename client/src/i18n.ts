@@ -12,7 +12,7 @@ const resources = {
         contact: "Contact"
       },
       hero: {
-        title: "AI-native MVP Engineer / Architect / Developer",
+        title: "AI-Native Business IT Developer",
         subtitle: "Ik ontwerp en bouw complete producten van idee tot werkende realiteit.",
         description: "Voor startups en founders vertaal ik concepten naar launch-klare MVP's, schaalbare platformen en geautomatiseerde businesssystemen.",
         cta: "Bekijk Mijn Werk",
@@ -51,7 +51,7 @@ const resources = {
       },
       footer: {
         rights: "Alle rechten voorbehouden",
-        description: "AI-native MVP Engineer / Architect / Developer"
+        description: "AI-Native Business IT Developer"
       }
     }
   },
@@ -64,7 +64,7 @@ const resources = {
         contact: "Contact"
       },
       hero: {
-        title: "AI-native MVP Engineer / Architect / Developer",
+        title: "AI-Native Business IT Developer",
         subtitle: "I design and build complete products from idea to working reality.",
         description: "For startups and founders, I translate concepts into launch-ready MVPs, scalable platforms, and automated business systems.",
         cta: "View My Work",
@@ -103,7 +103,7 @@ const resources = {
       },
       footer: {
         rights: "All rights reserved",
-        description: "AI-native MVP Engineer / Architect / Developer"
+        description: "AI-Native Business IT Developer"
       }
     }
   }
