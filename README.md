@@ -1,6 +1,6 @@
 # Jamal Drenthe — Portfolio / CV
 
-Detailleerde instructies om lokaal te draaien, te bouwen en issues op te lossen.
+Lokaal draaien, bouwen en recente features (uitgebreide routes, search/⌘K, taal/thema toggles).
 
 ## Stack
 
@@ -50,9 +50,15 @@ Houd Vite op 5173 om poortconflict te vermijden.
 
 ## Scripts
 
-- `npm run dev` — start Express devserver op 5000
-- `npx vite --host --port 5173 --config vite.config.ts` — start Vite frontend
+- `npm run dev` — start Express + Vite middleware op poort 5000 (frontend & API samen)
+- `npx vite --host --port 5173 --config vite.config.ts` — optioneel losse Vite frontend
 - `npm run build` — bouwt frontend naar `dist/public` en bundelt `server/index.ts` naar `dist/index.js`
+
+## Belangrijke features
+
+- Navigatie via `navigationItems` (desktop + mobiel dropdown), taal toggle (NL/EN) en thema toggle (kleur ↔ zwart-wit)
+- Search Command (⌘K / Ctrl+K) inclusief `SearchCommand` component en NavBar-knop
+- Uitgebreide routes voor CV, Services, Portfolio, About, Music, Products, Login
 
 ## Router
 
@@ -69,6 +75,7 @@ Gebruik **niet** `react-router-dom`.
 - **502/Bad Gateway in preview**: start Vite op 5173; zorg dat de Express server niet de preview blokkeert. Open direct `http://localhost:5173` als de proxy faalt.
 - **Port already in use (5000 of 5173)**: stop het proces of kies een andere poort, bijvoorbeeld `--port 5174` voor Vite.
 - **Router import errors**: vervang `react-router-dom` imports door `wouter`.
+- **⌘K werkt niet**: controleer dat `SearchCommand` is gemount (Layout in `App.tsx`) en NavBar `onSearchOpen` prop krijgt.
 - **Slow/failed install op Windows**: update Node/NPM en herhaal `npm install`.
 
 ## Build & output
