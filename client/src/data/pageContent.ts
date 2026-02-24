@@ -33,44 +33,6 @@ Elk trajectory draagt bij aan een compleet profiel: technische vaardigheden voor
     }
   },
 
-  // Services Overview
-  'services-overview': {
-    blurb: 'Uitgebreide dienstverlening over dertien gespecialiseerde domeinen: van web development en applicatieontwikkeling tot cloud management, cryptocurrency mining, video productie, muziekproductie, AI automation, marketing consultancy, full stack development, 3D visualisatie, juridisch advies en specialized services. Elke dienst wordt geleverd met focus op kwaliteit, innovatie en meetbare resultaten.',
-    fullPage: `Een compleet servicepakket dat technische expertise combineert met creatieve oplossingen en strategisch advies. Elk service domein is ontwikkeld vanuit jarenlange ervaring en wordt continu verfijnd met de nieuwste technologieën en best practices.
-
-**Web Development** - Websites worden ontworpen en ontwikkeld met perfecte balans tussen visuele aantrekkingskracht en functionaliteit. Van zakelijke portals tot interactieve e-commerceplatforms, elk project wordt op maat gemaakt. React, Tailwind CSS, Shopify en Webflow vormen de technische basis, terwijl gebruikerservaring en conversie-optimalisatie centraal staan. Responsive design, snelle laadtijden en SEO-optimalisatie zijn standaard.
-
-**Applicatieontwikkeling** - Web- en mobiele applicaties worden ontwikkeld met schaalbaarheid, veiligheid en gebruiksvriendelijkheid als uitgangspunt. Analytische dashboards bieden real-time inzichten, automatiseringsapplicaties verbeteren operationele efficiency, en SaaS-platforms creëren nieuwe businessmodellen. Elke applicatie wordt gebouwd met robuuste architectuur en toekomstbestendige technologie.
-
-**Private Cloud & Server Management** - Complete infrastructuurbeheer inclusief configuratie, beveiliging, monitoring en onderhoud. Betrouwbaarheid en performance staan centraal, met 99.9% uptime garanties en proactieve security. Dataveiligheid, compliance en operationele continuïteit worden gewaarborgd door industry-standard protocols en best practices.
-
-**Cryptocurrency Mining** - Mining-infrastructuren worden ontworpen voor maximale efficiëntie en ROI. Hardware-configuraties, software-optimalisatie en strategische poolselectie zorgen voor optimale output. Continue monitoring en aanpassingen garanderen dat systemen presteren op het hoogste niveau.
-
-**Remote Computing** - Veilige en efficiënte remote access oplossingen maken locatie-onafhankelijk werken mogelijk. VPN-configuraties, secure protocols en performance-optimalisatie zorgen dat teams productief kunnen zijn waar ze ook zijn. Gebruiksgemak en beveiliging gaan hand in hand.
-
-**Video Production & Editing** - Van concept tot eindproduct worden video's gecreëerd die impact maken. Professionele editing, color grading, motion graphics en sound design komen samen in producties die zowel informeren als inspireren. Corporate video's, marketing content en creatieve projecten worden geleverd in broadcast-kwaliteit.
-
-**Music Production** - Complete muziekproducties van beatmaking tot mastering. Originele composities, vocale opnames, mixing en finalisatie worden geleverd in release-ready kwaliteit. Technische precisie en creatieve expressie vormen samen producties die professioneel en meeslepend zijn.
-
-**AI Agents & Automation** - Intelligente automatisering van bedrijfsprocessen door middel van AI-agents en workflow-optimalisatie. Data-analyse, chatbots, process automation en machine learning implementaties strekken zich uit over diverse sectoren. Van klantenservice tot operationele efficiency, AI wordt strategisch ingezet voor meetbare voordelen.
-
-**Sales & Marketing Consultancy** - Strategisch advies en hands-on uitvoering voor leadgeneratie, klantsegmentatie en conversie-optimalisatie. Data-driven campagnes, marketing automation en sales funnel optimalisatie resulteren in meetbare groei. Analytische benaderingen worden gecombineerd met creatieve strategieën.
-
-**Full Stack Development** - Complete digitale oplossingen van front-end tot back-end. TypeScript, Node.js, React en Supabase garanderen schaalbare en onderhoudbare systemen. Database design, API development, UI/UX design en deployment worden geïntegreerd geleverd.
-
-**3D Modeling & Visualization** - Fotorealistische 3D-modellen en visualisaties voor productpresentaties, architectuur en interactieve applicaties. Technische nauwkeurigheid en visuele esthetiek gaan hand in hand in renders die overtuigen.
-
-**Legal Advisory** - Juridisch advies voor contracten, compliance en zakelijke rechtsvraagstukken. Risico's worden geïdentificeerd en geminimaliseerd, processen geoptimaliseerd. Praktische advisering zonder onnodige juridische complexiteit, altijd met disclaimer voor formele zaken.
-
-**Specialized Services** - Massage en catering services combineren praktische vaardigheden met professionele uitvoering. Klanttevredenheid en kwaliteit staan centraal bij elke service.
-
-Alle services worden geleverd met focus op kwaliteit, transparantie en meetbare resultaten. Projectmanagement, communicatie en after-care zijn geïntegreerd in elk project.`,
-    seo: {
-      title: 'Professional Services - Web, Apps, AI & meer | Jamal',
-      description: 'Uitgebreide dienstverlening in web development, apps, cloud, AI automation, video/muziekproductie, marketing consultancy en meer.'
-    }
-  },
-
   // About
   'about': {
     blurb: 'Full stack developer met multidisciplinaire achtergrond in IT, sales, horeca en cybersecurity. Expertise in React, Node.js, Supabase en moderne web technologieën. Focus op gebruikerservaring, schaalbaarheid en innovatieve oplossingen die technische perfectie combineren met strategisch inzicht.',

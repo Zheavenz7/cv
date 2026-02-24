@@ -365,12 +365,7 @@ const resumeData = {
         "Supabase",
         "D3.js",
         "FastAPI",
-        "Python",
-        "NumPy",
-        "Pandas",
-        "SciPy",
-        "statsmodels",
-        "TensorFlow",
+        "Python (NumPy, Pandas, SciPy, statsmodels, TensorFlow)",
         "Plotly",
         "Selenium",
         "Requests",
@@ -387,7 +382,7 @@ const resumeData = {
       sourceLink: "#"
     },
     {
-      title: "WoningVry",
+      title: "WoningVrij",
       description: "Tech Lead — vastgoedplatform voor het vinden en beheren van woonruimte.",
       technologies: ["React", "Vite", "Firebase"],
       demoLink: "https://woningvrij.nl",
