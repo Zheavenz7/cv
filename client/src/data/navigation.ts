@@ -65,17 +65,6 @@ export const navigationItems: NavItem[] = [
     id: 'projects',
     label: 'Projecten',
     href: '/projects',
-    children: [
-      { id: 'project-investbotiq', label: 'Investbotiq', href: '/projects/investbotiq' },
-      { id: 'project-after-student-housing', label: 'After Student Housing', href: '/projects/after-student-housing' },
-      { id: 'project-vvc', label: 'Verdienende Vrienden Club', href: '/projects/vvc' },
-      { id: 'project-djobba', label: 'DJOBBA', href: '/projects/djobba' },
-      { id: 'project-boastplug', label: 'BoastPlug', href: '/projects/boastplug' },
-      { id: 'project-huascabar', label: 'Huascabar', href: '/projects/huascabar' },
-      { id: 'project-sabi-bank', label: 'Sabi Bank', href: '/projects/sabi-bank' },
-      { id: 'project-anon-bank', label: 'Anon Bank', href: '/projects/anon-bank' },
-      { id: 'project-rjp', label: 'RJP', href: '/projects/rjp' },
-    ],
   },
   {
     id: 'music',
@@ -92,6 +81,7 @@ export const navigationItems: NavItem[] = [
     label: 'About Me',
     href: '/about',
     children: [
+      { id: 'about-overview', label: 'Overview', href: '/about/overview' },
       { id: 'about-skills', label: 'Skills', href: '/about/skills' },
       { id: 'about-diplomas', label: 'Diploma\'s', href: '/about/diplomas' },
       { id: 'about-career', label: 'Career Path', href: '/about/career' },
@@ -102,7 +92,7 @@ export const navigationItems: NavItem[] = [
     label: 'Products',
     href: '/products',
     children: [
-      { id: 'product-mining-pc', label: 'Mining Computer', href: '/products/mining-computer' },
+      { id: 'product-mining-pc', label: 'Mining Computer', href: '/products/mining-pc' },
       { id: 'product-huascabarkit', label: 'HuascaBarKit', href: '/products/huascabarkit' },
       { id: 'product-special-tea', label: 'Special Tea', href: '/products/special-tea' },
       { id: 'product-books', label: 'Books', href: '/products/books' },
@@ -120,7 +110,7 @@ export const navigationItems: NavItem[] = [
     children: [
       { id: 'login-accounts', label: 'Accounts', href: '/login/accounts' },
       { id: 'login-banks', label: 'Banken', href: '/login/banks' },
-      { id: 'login-company', label: 'Company Formation', href: '/login/company-formation' },
+      { id: 'login-company', label: 'Company Formation', href: '/login/company' },
       { id: 'login-streaming', label: 'Streaming Platformen', href: '/login/streaming' },
       { id: 'login-factoring', label: 'Factoring', href: '/login/factoring' },
       { id: 'login-issuing', label: 'Issuing', href: '/login/issuing' },
