@@ -98,7 +98,7 @@ export default function AboutSection() {
                   className="fas fa-user-graduate text-sm"
                   whileHover={{ rotate: 12 }}
                   transition={{ type: 'spring', stiffness: 300 }}
-                ></motion.i>Professionele Samenvatting
+                ></motion.i>{t('aboutSection.summary')}
               </h3>
               <p className="text-gray-300 text-sm leading-relaxed">{summary}</p>
             </motion.div>
@@ -116,7 +116,7 @@ export default function AboutSection() {
                   className="fas fa-language text-sm"
                   whileHover={{ rotate: -12 }}
                   transition={{ type: 'spring', stiffness: 300 }}
-                ></motion.i>Talen
+                ></motion.i>{t('aboutSection.languages')}
               </h3>
               <div className="space-y-2">
                 {languages.map((lang, index) => (
@@ -145,9 +145,9 @@ export default function AboutSection() {
                   className="fas fa-map-marker-alt text-sm"
                   animate={{ y: [0, -3, 0] }}
                   transition={{ duration: 2, repeat: Infinity, ease: 'easeInOut' }}
-                ></motion.i>Locatie
+                ></motion.i>{t('aboutSection.location')}
               </h3>
-              <p className="text-sm text-gray-300">{location} · Op afstand beschikbaar</p>
+              <p className="text-sm text-gray-300">{location} · {t('aboutSection.remote')}</p>
               <p className="mt-2 text-sm">
                 <motion.a 
                   href={`mailto:${email}`} 

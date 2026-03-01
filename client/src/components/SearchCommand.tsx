@@ -53,7 +53,7 @@ function buildIndex(): SearchResult[] {
   for (const exp of resumeData.experiences) {
     results.push({
       type: 'experience',
-      title: `${exp.title} — ${exp.company}`,
+      title: `${exp.title} bij ${exp.company}`,
       subtitle: `${exp.period} · ${exp.technologies.join(', ')}`,
       category: 'Track Record',
       icon: 'fa-briefcase',
@@ -168,7 +168,7 @@ export default function SearchCommand({ isOpen, onClose }: { isOpen: boolean; on
 
           {/* Dialog */}
           <motion.div
-            className="fixed top-[15%] left-1/2 -translate-x-1/2 w-[90%] max-w-xl z-[101]"
+            className="fixed top-[15%] inset-x-0 mx-auto w-[90%] max-w-xl z-[101]"
             initial={{ opacity: 0, y: -20, scale: 0.95 }}
             animate={{ opacity: 1, y: 0, scale: 1 }}
             exit={{ opacity: 0, y: -20, scale: 0.95 }}
@@ -184,7 +184,7 @@ export default function SearchCommand({ isOpen, onClose }: { isOpen: boolean; on
                   value={query}
                   onChange={(e) => setQuery(e.target.value)}
                   onKeyDown={handleKeyDown}
-                  placeholder="Zoek skills, tools, projecten..."
+                  placeholder="Typ om te zoeken in skills en ervaring"
                   className="flex-1 bg-transparent outline-none text-white placeholder-gray-500 text-sm"
                   autoComplete="off"
                   spellCheck={false}

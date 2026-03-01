@@ -4,7 +4,6 @@ import { motion } from 'framer-motion';
 import { cn } from '@/lib/utils';
 import { useTranslation } from 'react-i18next';
 
-import jdLogo from '@/assets/logos/jd-logo.png';
 
 export default function NavBar({ onSearchOpen }: { onSearchOpen?: () => void }) {
   const { t, i18n } = useTranslation();
@@ -12,22 +11,11 @@ export default function NavBar({ onSearchOpen }: { onSearchOpen?: () => void }) 
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
   const [scrollProgress, setScrollProgress] = useState(0);
-  const [isBlackAndWhite, setIsBlackAndWhite] = useState(false);
 
   const toggleLanguage = () => {
     const newLang = i18n.language === 'nl' ? 'en' : 'nl';
     i18n.changeLanguage(newLang);
   };
-
-  useEffect(() => {
-    if (isBlackAndWhite) {
-      document.body.classList.add('black-and-white');
-    } else {
-      document.body.classList.remove('black-and-white');
-    }
-  }, [isBlackAndWhite]);
-
-  const toggleTheme = () => setIsBlackAndWhite(!isBlackAndWhite);
   
   const toggleMenu = () => {
     setIsMenuOpen(!isMenuOpen);
@@ -57,7 +45,7 @@ export default function NavBar({ onSearchOpen }: { onSearchOpen?: () => void }) 
   
   return (
     <nav className={cn(
-      "fixed top-0 left-0 right-0 z-30 transition-all duration-500 will-change-transform",
+      "fixed top-0 left-0 right-0 z-50 transition-all duration-500 will-change-transform",
       scrolled 
         ? "backdrop-blur-2xl bg-darkBg/60 shadow-lg shadow-black/10 border-b border-white/[0.06] py-2" 
         : "bg-transparent py-4"
@@ -67,7 +55,7 @@ export default function NavBar({ onSearchOpen }: { onSearchOpen?: () => void }) 
         <Link href="/" className="flex items-center gap-2 group transition-all duration-300">
           <div className="relative w-10 h-10 md:w-11 md:h-11 overflow-hidden rounded-xl bg-white/[0.06] border border-white/[0.1] group-hover:border-primary/40 group-hover:bg-white/[0.1] transition-all duration-300">
             <img 
-              src={jdLogo} 
+              src="/jd-logo.png" 
               alt="JD Logo" 
               className="w-full h-full object-contain filter brightness-100 contrast-125"
             />
@@ -88,14 +76,14 @@ export default function NavBar({ onSearchOpen }: { onSearchOpen?: () => void }) 
           className={cn(
             "md:flex items-center gap-1",
             isMenuOpen 
-              ? "flex flex-col absolute top-full left-4 right-4 mt-2 glass-strong rounded-2xl p-3 space-y-1 md:static md:bg-transparent md:backdrop-blur-none md:border-0 md:shadow-none md:p-0 md:space-y-0 md:rounded-none" 
+              ? "flex flex-col absolute top-full left-4 right-4 mt-2 glass-strong bg-gray-950/90 backdrop-blur-2xl rounded-2xl p-3 space-y-1 md:static md:bg-transparent md:backdrop-blur-none md:border-0 md:shadow-none md:p-0 md:space-y-0 md:rounded-none" 
               : "hidden md:flex"
           )}
         >
           {[
             { id: 'home', label: t('nav.home') },
             { id: 'about', label: t('nav.about') },
-            { id: 'services', label: 'Diensten' },
+            { id: 'services', label: t('nav.services') },
             { id: 'cv', label: 'CV' },
             { id: 'projects', label: t('nav.projects') },
             { id: 'contact', label: t('nav.contact') }
@@ -123,7 +111,7 @@ export default function NavBar({ onSearchOpen }: { onSearchOpen?: () => void }) 
                 aria-label="Search"
               >
                 <i className="fas fa-search text-xs"></i>
-                <span className="hidden lg:inline text-xs text-gray-500">Zoeken</span>
+                <span className="hidden lg:inline text-xs text-gray-500">{t('nav.search')}</span>
                 <kbd className="hidden lg:inline-flex items-center px-1.5 py-0.5 rounded bg-white/[0.06] border border-white/[0.08] text-[9px] text-gray-600 font-mono ml-1">
                   ⌘K
                 </kbd>
@@ -138,17 +126,6 @@ export default function NavBar({ onSearchOpen }: { onSearchOpen?: () => void }) 
               {i18n.language === 'nl' ? 'EN' : 'NL'}
             </button>
             
-            <button
-              onClick={toggleTheme}
-              className="p-2 rounded-xl hover:bg-white/[0.06] transition-all duration-200 text-gray-400 hover:text-white"
-              aria-label="Toggle theme"
-            >
-              {isBlackAndWhite ? (
-                <i className="fas fa-palette text-sm"></i>
-              ) : (
-                <i className="fas fa-ghost text-sm"></i>
-              )}
-            </button>
           </div>
         </div>
       </div>

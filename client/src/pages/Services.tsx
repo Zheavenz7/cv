@@ -1,164 +1,35 @@
 import { useEffect } from 'react';
 import { motion } from 'framer-motion';
 import Footer from "@/components/Footer";
+import { useTranslation } from 'react-i18next';
 
-const services = [
-  {
-    title: "Sales",
-    subtitle: "Van Eerste Contact tot Maximale Klantwaarde",
-    description: "Ik bouw geen losse salesacties. Ik ontwikkel winstgevende klantreizen.",
-    icon: "fas fa-handshake",
-    accent: "from-blue-500/20 to-cyan-400/20",
-    borderAccent: "group-hover:border-blue-500/50",
-    categories: [
-      {
-        name: "Lead Activatie & Acquisitie",
-        items: [
-          "Telefonische acquisitie (koud & warm)",
-          "Fysieke verkoop (F2F / D2D)",
-          "B2B sales & strategisch relatiebeheer"
-        ]
-      },
-      {
-        name: "Conversie & Closing",
-        items: [
-          "Pre-closing (kwalificatie & positionering)",
-          "High-level closing & onderhandeling",
-          "Dealstructurering"
-        ]
-      },
-      {
-        name: "Maximale Klantwaarde",
-        items: [
-          "Up-selling & premium positionering",
-          "Cross-selling strategieën",
-          "Aftersales optimalisatie",
-          "Retentie & klantloyaliteitssystemen"
-        ]
-      }
-    ],
-    footer: "Resultaat: meer omzet per klant en duurzame groei."
-  },
-  {
-    title: "Marketing",
-    subtitle: "Van Zichtbaarheid naar Voorspelbare Groei",
-    description: "Marketing is geen kostenpost, maar een groeiversneller — mits goed ingericht.",
-    icon: "fas fa-bullhorn",
-    accent: "from-purple-500/20 to-pink-400/20",
-    borderAccent: "group-hover:border-purple-500/50",
-    categories: [
-      {
-        name: "Strategie & Uitvoering",
-        items: [
-          "Leadgeneratie funnels",
-          "Social media strategie & beheer",
-          "SEO (organische vindbaarheid)",
-          "Performance advertising (online & offline)",
-          "Contentstrategie & creatie (video, copy, visuals)"
-        ]
-      }
-    ],
-    footer: "Ik zorg voor meetbare impact en schaalbaarheid."
-  },
-  {
-    title: "IT & Development",
-    subtitle: "Digitale Systemen die Schalen",
-    description: "Ik ontwikkel digitale infrastructuur die jouw ambities ondersteunt.",
-    icon: "fas fa-code",
-    accent: "from-emerald-500/20 to-teal-400/20",
-    borderAccent: "group-hover:border-emerald-500/50",
-    categories: [
-      {
-        name: "Development",
-        items: [
-          "High-performance websites",
-          "Maatwerk webapps",
-          "Native & hybride app development",
-          "SaaS-oplossingen",
-          "UI/UX design (intuïtief, minimalistisch, conversiegericht)",
-          "Slimme maatwerk tools & rekenmodules",
-          "E-commerce ontwikkeling",
-          "MVP-ontwikkeling",
-          "Game development"
-        ]
-      }
-    ],
-    footer: "Alles gericht op efficiëntie, schaalbaarheid en gebruikservaring."
-  },
-  {
-    title: "Rechten & Juridisch Advies",
-    subtitle: "Strategische Zekerheid",
-    description: "Wanneer juridische complexiteit impact heeft op jouw onderneming of situatie, bied ik strategisch advies en begeleiding.",
-    icon: "fas fa-scale-balanced",
-    accent: "from-amber-500/20 to-orange-400/20",
-    borderAccent: "group-hover:border-amber-500/50",
-    categories: [
-      {
-        name: "Expertisegebieden",
-        items: [
-          "Strafrecht",
-          "Bedrijfsrecht",
-          "Bestuursrecht"
-        ]
-      }
-    ],
-    footer: "Discreet, professioneel en oplossingsgericht."
-  },
-  {
-    title: "Multimedia & Creatie",
-    subtitle: "Impactvolle Beleving",
-    description: "Sterke merken communiceren visueel én auditief op hoog niveau.",
-    icon: "fas fa-photo-video",
-    accent: "from-rose-500/20 to-red-400/20",
-    borderAccent: "group-hover:border-rose-500/50",
-    categories: [
-      {
-        name: "Video & Visual",
-        items: [
-          "Video editing & sfeerbeelden",
-          "Motion graphics",
-          "3D design & animatie",
-          "Grafische vormgeving",
-          "Infographics"
-        ]
-      },
-      {
-        name: "Audio & Muziek",
-        items: [
-          "Muziekproductie",
-          "Songwriting",
-          "Vocalen & voice-overs",
-          "Mix & master"
-        ]
-      }
-    ],
-    footer: "Van concept tot eindproduct: professioneel en onderscheidend."
-  },
-  {
-    title: "Finance",
-    subtitle: "Structuur Achter de Groei",
-    description: "Sterke resultaten beginnen bij financiële controle.",
-    icon: "fas fa-chart-line",
-    accent: "from-cyan-500/20 to-blue-400/20",
-    borderAccent: "group-hover:border-cyan-500/50",
-    categories: [
-      {
-        name: "Financieel Inzicht",
-        items: [
-          "Winst op papier betekent niets zonder controle over timing.",
-          "Cashflow is de zuurstof van elke onderneming.",
-          "TGC (Time Gap Cashflow): strategisch beheren van tijd tussen inkomsten en uitgaven."
-        ]
-      }
-    ],
-    footer: "Grip op cijfers betekent grip op groei."
-  }
+const serviceKeys = [
+  { key: 'it', icon: 'fas fa-code', accent: 'from-emerald-500/20 to-teal-400/20', borderAccent: 'group-hover:border-emerald-500/50', catKeys: ['catDev'], itemsKeys: ['items'] },
+  { key: 'marketing', icon: 'fas fa-bullhorn', accent: 'from-purple-500/20 to-pink-400/20', borderAccent: 'group-hover:border-purple-500/50', catKeys: ['catStrategy'], itemsKeys: ['items'] },
+  { key: 'sales', icon: 'fas fa-handshake', accent: 'from-blue-500/20 to-cyan-400/20', borderAccent: 'group-hover:border-blue-500/50', catKeys: ['catAcq', 'catConv', 'catValue'], itemsKeys: ['itemsAcq', 'itemsConv', 'itemsValue'] },
+  { key: 'multimedia', icon: 'fas fa-photo-video', accent: 'from-rose-500/20 to-red-400/20', borderAccent: 'group-hover:border-rose-500/50', catKeys: ['catVideo', 'catAudio'], itemsKeys: ['itemsVideo', 'itemsAudio'] },
+  { key: 'legal', icon: 'fas fa-scale-balanced', accent: 'from-amber-500/20 to-orange-400/20', borderAccent: 'group-hover:border-amber-500/50', catKeys: ['catExpertise'], itemsKeys: ['items'] },
+  { key: 'finance', icon: 'fas fa-chart-line', accent: 'from-cyan-500/20 to-blue-400/20', borderAccent: 'group-hover:border-cyan-500/50', catKeys: ['catInsight'], itemsKeys: ['items'] },
 ];
 
 export default function Services() {
+  const { t } = useTranslation();
+
   useEffect(() => {
-    document.title = 'Mijn Diensten | Jamal Drenthe';
-  }, []);
+    document.title = `${t('servicesPage.title')} | Jamal Drenthe`;
+  }, [t]);
+
+  const services = serviceKeys.map(s => ({
+    ...s,
+    title: t(`servicesPage.services.${s.key}.title`),
+    subtitle: t(`servicesPage.services.${s.key}.subtitle`),
+    description: t(`servicesPage.services.${s.key}.description`),
+    footer: t(`servicesPage.services.${s.key}.footer`),
+    categories: s.catKeys.map((ck, ci) => ({
+      name: t(`servicesPage.services.${s.key}.${ck}`),
+      items: (t(`servicesPage.services.${s.key}.${s.itemsKeys[ci]}`, { returnObjects: true }) as string[]),
+    })),
+  }));
 
   return (
     <div className="text-white">
@@ -172,7 +43,7 @@ export default function Services() {
               animate={{ opacity: 1, y: 0 }}
               className="inline-flex items-center gap-2 px-4 py-2 rounded-full glass text-xs uppercase tracking-[0.2em] text-white/70"
             >
-              <span className="w-2 h-2 rounded-full bg-primary" /> Expertise & Aanbod
+              <span className="w-2 h-2 rounded-full bg-primary" /> {t('servicesPage.badge')}
             </motion.p>
             <motion.h1 
               initial={{ opacity: 0, y: 20 }}
@@ -180,7 +51,7 @@ export default function Services() {
               transition={{ delay: 0.1 }}
               className="text-4xl md:text-5xl font-bold text-white font-montserrat drop-shadow-sm"
             >
-              Mijn Diensten
+              {t('servicesPage.title')}
             </motion.h1>
             <motion.p 
               initial={{ opacity: 0, y: 20 }}
@@ -188,7 +59,7 @@ export default function Services() {
               transition={{ delay: 0.2 }}
               className="text-base text-white/70 max-w-2xl mx-auto"
             >
-              Van strategie tot executie. Ik lever resultaat op het snijvlak van commercie, techniek en creativiteit.
+              {t('servicesPage.description')}
             </motion.p>
           </div>
 

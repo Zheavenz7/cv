@@ -3,26 +3,28 @@ import { motion, AnimatePresence } from 'framer-motion';
 import useOnScreen from '@/hooks/useOnScreen';
 import resumeData from '@/data/resumeData';
 import type { ExperienceType } from '@/data/resumeData';
+import { useTranslation } from 'react-i18next';
 
-const filters: { label: string; value: ExperienceType | 'all'; icon: string }[] = [
-  { label: 'Alles', value: 'all', icon: 'fa-layer-group' },
-  { label: 'Fulltime', value: 'fulltime', icon: 'fa-building' },
-  { label: 'Freelance', value: 'freelance', icon: 'fa-laptop' },
-  { label: 'Opleidingen', value: 'opleiding', icon: 'fa-graduation-cap' },
-  { label: 'Vrijwilligers', value: 'vrijwilliger', icon: 'fa-heart' },
+const filterDefs: { key: string; value: ExperienceType | 'all'; icon: string }[] = [
+  { key: 'experience.filter.all', value: 'all', icon: 'fa-layer-group' },
+  { key: 'experience.filter.fulltime', value: 'fulltime', icon: 'fa-building' },
+  { key: 'experience.filter.freelance', value: 'freelance', icon: 'fa-laptop' },
+  { key: 'experience.filter.education', value: 'opleiding', icon: 'fa-graduation-cap' },
+  { key: 'experience.filter.volunteer', value: 'vrijwilliger', icon: 'fa-heart' },
 ];
 
-const typeLabels: Record<ExperienceType, string> = {
-  fulltime: 'Fulltime',
-  freelance: 'Freelance',
-  opleiding: 'Stage',
-  vrijwilliger: 'Vrijwilliger',
-};
-
 export default function ExperienceSection() {
+  const { t } = useTranslation();
   const sectionRef = useRef<HTMLDivElement>(null);
   const isVisible = useOnScreen(sectionRef);
   const [activeFilter, setActiveFilter] = useState<ExperienceType | 'all'>('all');
+
+  const typeLabels: Record<ExperienceType, string> = {
+    fulltime: t('experience.type.fulltime'),
+    freelance: t('experience.type.freelance'),
+    opleiding: t('experience.type.opleiding'),
+    vrijwilliger: t('experience.type.vrijwilliger'),
+  };
   
   const { experiences } = resumeData;
 
@@ -41,7 +43,7 @@ export default function ExperienceSection() {
           viewport={{ once: true, margin: '-50px' }}
           transition={{ duration: 0.6 }}
         >
-          Track Record
+          {t('experience.title')}
           <span className="section-heading-line" />
         </motion.h2>
 
@@ -53,7 +55,7 @@ export default function ExperienceSection() {
           viewport={{ once: true }}
           transition={{ duration: 0.5, delay: 0.2 }}
         >
-          {filters.map((filter) => (
+          {filterDefs.map((filter) => (
             <motion.button
               key={filter.value}
               onClick={() => setActiveFilter(filter.value)}
@@ -68,9 +70,11 @@ export default function ExperienceSection() {
             >
               <span className="flex items-center gap-1.5">
                 <i className={`fas ${filter.icon} text-[10px]`}></i>
-                {filter.label}
-                <span className={`text-[10px] ${
-                  activeFilter === filter.value ? 'text-primary/60' : 'text-gray-600'
+                {t(filter.key)}
+                <span className={`ml-1 inline-flex items-center justify-center min-w-[18px] h-[18px] px-1.5 rounded-full text-[9px] font-semibold ${
+                  activeFilter === filter.value
+                    ? 'bg-primary/20 text-primary/80'
+                    : 'bg-white/[0.06] text-gray-500'
                 }`}>
                   {filter.value === 'all' 
                     ? experiences.length 
@@ -153,7 +157,7 @@ export default function ExperienceSection() {
                   initial={{ opacity: 0 }}
                   animate={{ opacity: 1 }}
                 >
-                  Geen resultaten voor dit filter.
+                  {t('experience.noResults')}
                 </motion.p>
               )}
             </AnimatePresence>

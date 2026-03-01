@@ -1,92 +1,166 @@
-# Jamal Drenthe — Portfolio / CV
+# Jamal Drenthe — Portfolio & CV
 
-Lokaal draaien, bouwen en recente features (uitgebreide routes, search/⌘K, taal/thema toggles).
+Personal portfolio and interactive CV built with React, TypeScript and Vite. Features a full EN/NL language toggle, role-based CV view, project showcase, and a ⌘K global search command.
 
-## Stack
+**Live:** [jamaldrenthe.com](https://jamaldrenthe.com)
 
-- Vite + React + TypeScript (frontend in `client/`, via `vite.config.ts` met `root: client`)
-- Express devserver (`server/index.ts`) op poort 5000 (optioneel tijdens dev)
-- TailwindCSS, framer-motion, Radix UI, `wouter` (router)
+---
 
-## Vereisten
+## Tech Stack
 
-- Node.js 18+ (bij voorkeur 20+)
+| Layer | Technology |
+|---|---|
+| Framework | React 18 + TypeScript |
+| Build tool | Vite 5 |
+| Styling | Tailwind CSS |
+| Animations | Framer Motion |
+| UI components | Radix UI · shadcn/ui |
+| Routing | Wouter |
+| i18n | i18next + react-i18next |
+| Server | Express (dev proxy) |
+| Icons | Font Awesome |
+
+---
+
+## Project Structure
+
+```
+cv/
+├── client/
+│   ├── public/               # Static assets (logos, favicon)
+│   └── src/
+│       ├── assets/           # Images, logos
+│       ├── components/       # Reusable UI components
+│       │   ├── NavBar.tsx
+│       │   ├── HeroSection.tsx
+│       │   ├── AboutSection.tsx
+│       │   ├── ExperienceSection.tsx
+│       │   ├── ProjectsSection.tsx
+│       │   ├── ContactSection.tsx
+│       │   ├── Footer.tsx
+│       │   └── SearchCommand.tsx
+│       ├── data/
+│       │   └── resumeData.ts # Single source of truth for all CV/portfolio data
+│       ├── hooks/            # Custom React hooks
+│       ├── pages/            # Route-level pages
+│       │   ├── Home.tsx
+│       │   ├── About.tsx
+│       │   ├── CV.tsx
+│       │   ├── Projects.tsx
+│       │   ├── Services.tsx
+│       │   └── Contact.tsx
+│       ├── i18n.ts           # EN/NL translations
+│       ├── App.tsx           # Router + layout
+│       └── index.css         # Global styles + Tailwind
+├── server/
+│   ├── index.ts              # Express dev server (port 5000)
+│   └── routes.ts
+├── shared/
+│   └── schema.ts
+├── vite.config.ts
+├── tailwind.config.ts
+└── package.json
+```
+
+---
+
+## Getting Started
+
+### Requirements
+
+- Node.js 18+ (20+ recommended)
 - npm 9+
 
-## Projectstructuur (relevant)
-
-- `client/src/` – frontend code (pages, components, data, hooks)
-- `client/src/data/resumeData.ts` – centrale CV/portfolio data
-- `client/src/pages/` – pagina's (Home, Projects, CV, About, Contact)
-- `client/src/components/` – UI componenten (NavBar, sections, etc.)
-- `server/index.ts` – devserver (poort 5000) aangeroepen door `npm run dev`
-- `vite.config.ts` – Vite config (root `client`, preview/serve poort 5173)
-
-## Installatie
+### Install
 
 ```bash
 npm install
 ```
 
-## Ontwikkelen
-
-Gebruik idealiter twee terminals: één voor Vite (frontend) en optioneel één voor de Express devserver.
-
-### Frontend (Vite)
-
-```bash
-npx vite --host --port 5173 --config vite.config.ts
-```
-
-Open daarna `http://localhost:5173` (of de proxy link uit je IDE).
-
-### Optioneel: Express devserver (poort 5000)
+### Run (dev)
 
 ```bash
 npm run dev
 ```
 
-Houd Vite op 5173 om poortconflict te vermijden.
+Opens on `http://localhost:5000` (Express + Vite middleware combined).
 
-## Scripts
-
-- `npm run dev` — start Express + Vite middleware op poort 5000 (frontend & API samen)
-- `npx vite --host --port 5173 --config vite.config.ts` — optioneel losse Vite frontend
-- `npm run build` — bouwt frontend naar `dist/public` en bundelt `server/index.ts` naar `dist/index.js`
-
-## Belangrijke features
-
-- Navigatie via `navigationItems` (desktop + mobiel dropdown), taal toggle (NL/EN) en thema toggle (kleur ↔ zwart-wit)
-- Search Command (⌘K / Ctrl+K) inclusief `SearchCommand` component en NavBar-knop
-- Uitgebreide routes voor CV, Services, Portfolio, About, Music, Products, Login
-
-## Router
-
-We gebruiken `wouter`. Importeer links zo:
-
-```tsx
-import { Link } from 'wouter';
-```
-
-Gebruik **niet** `react-router-dom`.
-
-## Troubleshooting
-
-- **502/Bad Gateway in preview**: start Vite op 5173; zorg dat de Express server niet de preview blokkeert. Open direct `http://localhost:5173` als de proxy faalt.
-- **Port already in use (5000 of 5173)**: stop het proces of kies een andere poort, bijvoorbeeld `--port 5174` voor Vite.
-- **Router import errors**: vervang `react-router-dom` imports door `wouter`.
-- **⌘K werkt niet**: controleer dat `SearchCommand` is gemount (Layout in `App.tsx`) en NavBar `onSearchOpen` prop krijgt.
-- **Slow/failed install op Windows**: update Node/NPM en herhaal `npm install`.
-
-## Build & output
+### Build
 
 ```bash
 npm run build
 ```
 
-- Frontend: `dist/public`
-- Server bundle: `dist/index.js`
+Output:
+- Frontend → `dist/public`
+- Server bundle → `dist/index.js`
 
-## Deployment (basic)
+---
 
-- Serve de inhoud van `dist/public` met een statische host of koppel `dist/index.js` als Node server (Express). Pas poorten/proxy aan naar je hosting omgeving.
+## Key Features
+
+- **EN/NL toggle** — full language switch via i18next; all pages and components are translated
+- **Role-based CV** — 11 switchable role views (MVP Architect, Business Developer, Full Stack Developer, AI/Automation Engineer, etc.), each with a tailored summary, highlights, core skills and relevant projects
+- **⌘K Search** — global fuzzy search across skills, projects and experience (Ctrl+K on Windows)
+- **Project showcase** — interactive cards with logos, tech stack badges, year labels and live/source links
+- **Glassmorphism UI** — iOS Liquid Glass aesthetic with frosted glass panels and Framer Motion animations
+- **Scroll progress bar** — live reading progress indicator in the navbar
+
+---
+
+## Routing
+
+Uses [`wouter`](https://github.com/molefrog/wouter) — **not** `react-router-dom`.
+
+```tsx
+import { Link, useLocation } from 'wouter';
+```
+
+| Route | Page |
+|---|---|
+| `/` | Home |
+| `/about` | About |
+| `/cv` | CV |
+| `/projects` | Projects |
+| `/services` | Services |
+| `/contact` | Contact |
+
+---
+
+## Data
+
+All CV and portfolio content lives in `client/src/data/resumeData.ts`:
+
+- Personal info (name, email, location, languages, soft skills)
+- Work experience (title, company, period, tech tags)
+- Projects (title, description, tech stack, demo/source links)
+- Detailed skill categories and tool groups
+
+All UI text and labels are managed in `client/src/i18n.ts`.
+
+---
+
+## Scripts
+
+| Command | Description |
+|---|---|
+| `npm run dev` | Start Express + Vite on port 5000 |
+| `npm run build` | Production build |
+| `npm run check` | TypeScript type check |
+
+---
+
+## Troubleshooting
+
+| Issue | Fix |
+|---|---|
+| `EADDRINUSE :5000` | Another process is using the port — kill it or restart |
+| Router import errors | Replace any `react-router-dom` imports with `wouter` |
+| ⌘K not responding | Ensure `SearchCommand` is mounted in `App.tsx` and `NavBar` receives the `onSearchOpen` prop |
+| Slow install on Windows | Update Node/npm and re-run `npm install` |
+
+---
+
+## Deployment
+
+Serve the contents of `dist/public` with any static host (Netlify, Vercel, etc.), or run `dist/index.js` as a Node/Express server. Adjust port and proxy settings to match your hosting environment.

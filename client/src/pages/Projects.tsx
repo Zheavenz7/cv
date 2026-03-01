@@ -3,6 +3,7 @@ import Footer from "@/components/Footer";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import resumeData from "@/data/resumeData";
+import { useTranslation } from 'react-i18next';
 
 import vvcLogo from '@/assets/logos/vvc.png';
 import iqLogo from '@/assets/logos/investbotiq.png';
@@ -10,11 +11,27 @@ import spontivaLogo from '@/assets/logos/spontiva.png';
 import wvLogo from '@/assets/logos/woningvrij.png';
 import djobbaLogo from '@/assets/logos/djobba.png';
 
+const projectYears: Record<string, string> = {
+  VVC: '2022',
+  Investbotiq: '2022',
+  Spontiva: '2022',
+  WoningVry: '2025',
+  DJOBBA: '2022',
+  'Angels Mediate': '2025',
+  'Reken Tools': '2025',
+  'Chat Tools': '2025',
+  'Video Gen Tool': '2025',
+  'Music DJ Tool': '2025',
+  'Spraak Tools': '2025',
+  'Dashboards': '2025',
+  'Content': '2025',
+};
+
 const projectLogos: Record<string, string> = {
   VVC: vvcLogo,
   Investbotiq: iqLogo,
   Spontiva: spontivaLogo,
-  WoningVrij: wvLogo,
+  WoningVry: wvLogo,
   DJOBBA: djobbaLogo,
 };
 
@@ -22,10 +39,75 @@ const copyOverrides: Record<string, string> = {
   VVC: 'Consultancy OS: intake tot facturatie in één flow. Dashboards, dossiers en workflows op maat.',
   Investbotiq:
     'AI-gedreven investeringsplatform: financiële data verzamelen, structureren en analyseren met kwant/AI-modellen, interactieve visualisaties en een realtime API-laag.',
-  Spontiva: 'All-in sportmanagement: planning, teams, payments en communicatie in één platform.',
-  WoningVrij: 'Woonplatform voor zoeken, beheren en contracteren — gebouwd op snelheid en betrouwbaarheid.',
+  Spontiva: 'Time Gap Cashflow analyse en uitvoering: liquiditeitsoptimalisatie en strategische cashflowsturing voor bedrijven.',
+  WoningVry: 'Woonplatform voor zoeken, beheren en contracteren, gebouwd op snelheid en betrouwbaarheid.',
   DJOBBA: 'Instant staffing: kandidaten matchen, onboarden en betalen met minimale frictie.',
   'Angels Mediate': 'Digitale mediation-omgeving met dossiers, afspraken en veilige communicatie.',
+  'Reken Tools': 'Slimme rekenmodules voor financiële en zakelijke beslissingen.',
+  'Chat Tools': 'AI-gestuurde chatinterfaces en gespreksassistenten op maat.',
+  'Video Gen Tool': 'AI-gedreven videogeneratie voor content en marketing.',
+  'Music DJ Tool': 'Browser-based DJ- en muziekmixapplicatie.',
+  'Spraak Tools': 'Spraakherkenning en tekst-naar-spraak tooling voor zakelijke toepassingen.',
+  'Dashboards': 'Modulaire business-dashboards voor KPI-monitoring en datavisualisatie.',
+  'Content': 'AI-native contentcreatie en -beheer voor marketing en groei.',
+};
+
+const projectBullets: Record<string, string[]> = {
+  Investbotiq: [
+    'AI-gedreven investerings- en financieringsplatform.',
+    'Systeemdesign & Architectuur: Ontwerp van een volledig geautomatiseerd ecosysteem met een AI-gedreven investeringsbot, gelaagde tier-structuren en complexe BEL/PLAT-financieringsmodellen.',
+    'Platform Engineering: Realisatie van een frictieloos financieel platform voor maandelijkse cashflow-opbouw (via spirits), zonder minimale inleg.',
+  ],
+  DJOBBA: [
+    'Platform voor flexibele arbeidsbemiddeling en matching.',
+    'Marktplaatslogica: Ontwikkeling van geavanceerde matching-algoritmes en efficiënte gebruikersstromen om vraag en aanbod naadloos aan elkaar te koppelen.',
+    'Procesautomatisering: Ontwerp van een schaalbare platformarchitectuur gericht op het verregaand automatiseren van handmatige bemiddelingsprocessen.',
+  ],
+  Spontiva: [
+    'Puur gericht op Time Gap Cashflow analyse en uitvoering.',
+    'Cashflow Engineering: Financiële systeemanalyse gericht op liquiditeitsoptimalisatie en het strategisch structureren van complexe timingverschillen.',
+    'Operationele Executie: Geen advies, maar daadwerkelijke implementatie en uitvoering van financiële cashflowoptimalisaties.',
+  ],
+  WoningVry: [
+    'Digitaal structureringsplatform voor vastgoedprojecten.',
+    'Informatiehiërarchie: Ontwikkeling van een robuuste platformarchitectuur voor kapitaalintensieve projecten, waarbij complexe vastgoeddata transparant en overzichtelijk wordt gestructureerd.',
+    'Business & Tech Integratie: Meer dan een presentatielaag; een digitaal fundament dat investeerders en betrokken partijen overzicht, schaalbaarheid en professionele projectvisualisatie biedt.',
+  ],
+  'Reken Tools': [
+    'Slimme rekenmodules voor financiële en zakelijke beslissingen.',
+    'Custom Logica: Maatwerk formules en berekeningsflows op basis van bedrijfsspecifieke parameters.',
+    'Integratie: Insluitbaar als widget in bestaande platforms of standalone als micro-tool.',
+  ],
+  'Chat Tools': [
+    'AI-gestuurde chatinterfaces en gespreksassistenten op maat.',
+    'LLM-integratie: OpenAI-gestuurde conversatieflows met context, geheugen en domeinspecifieke instructies.',
+    'Inzetbaarheid: Van klantenservice en sales-assistent tot interne kennistool.',
+  ],
+  'Video Gen Tool': [
+    'AI-gedreven videogeneratie voor content en marketing.',
+    'Generatieve pipeline: prompt-to-video workflow met AI-modellen voor snelle contentproductie.',
+    'Toepassing: Social media, product demos en marketing campagnes zonder productieploeg.',
+  ],
+  'Music DJ Tool': [
+    'Browser-based DJ- en muziekmixapplicatie.',
+    'Web Audio Engine: Real-time mixing, beatmatching en effecten direct in de browser zonder installatie.',
+    'Gebruiksgemak: Toegankelijke interface voor zowel hobbyist als professional.',
+  ],
+  'Spraak Tools': [
+    'Spraakherkenning en tekst-naar-spraak tooling voor zakelijke toepassingen.',
+    'AI-spraakverwerking: Whisper-integratie voor nauwkeurige transcriptie en meertalige ondersteuning.',
+    'Toepassingen: Notuleren, voice commands, klantenservice en toegankelijkheidsoplossingen.',
+  ],
+  'Dashboards': [
+    'Modulaire business-dashboards voor KPI-monitoring en datavisualisatie.',
+    'Datakoppeling: Realtime verbinding met externe databronnen via API of directe database-integratie.',
+    'Configureerbaar: Per gebruikersrol aanpasbare weergave van metrics en rapportages.',
+  ],
+  'Content': [
+    'AI-native contentcreatie en -beheer voor marketing en groei.',
+    'Generatieve workflow: Van briefing tot gepubliceerde content via geautomatiseerde AI-pipelines.',
+    'Multikanaal: Tekst, visuals en sociale media posts vanuit één centrale tool.',
+  ],
 };
 
 const vvcSubProjects = [
@@ -56,11 +138,12 @@ const vvcSubProjects = [
 ];
 
 export default function Projects() {
+  const { t } = useTranslation();
   const [expandedVVC, setExpandedVVC] = useState<string | null>(null);
 
   useEffect(() => {
-    document.title = 'Projecten | Jamal Drenthe';
-  }, []);
+    document.title = `${t('projects.title')} | Jamal Drenthe`;
+  }, [t]);
 
   const projects = resumeData.projects;
 
@@ -70,10 +153,10 @@ export default function Projects() {
         <div className="max-w-6xl mx-auto space-y-10">
           <div className="text-center space-y-4">
             <p className="inline-flex items-center gap-2 px-5 py-2.5 rounded-full glass text-[11px] uppercase tracking-[0.2em] text-white/80 shadow-lg shadow-primary/10">
-              <span className="w-2 h-2 rounded-full bg-primary" /> Projecten • Built for scale & flow
+              <span className="w-2 h-2 rounded-full bg-primary" /> {t('projects.badge')}
             </p>
-            <h1 className="text-4xl md:text-5xl font-bold text-white font-montserrat drop-shadow-sm">Portfolio</h1>
-            <p className="text-base text-white/75 max-w-3xl mx-auto">Producten die omzet, efficiëntie en ervaring combineren. Elk project is opgezet als platform: modulair, meetbaar, klaar voor groei.</p>
+            <h1 className="text-4xl md:text-5xl font-bold text-white font-montserrat drop-shadow-sm">{t('projects.heading')}</h1>
+            <p className="text-base text-white/75 max-w-3xl mx-auto">{t('projects.description')}</p>
           </div>
 
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-7">
@@ -93,8 +176,8 @@ export default function Projects() {
                         <img src={logo} alt={`${project.title} logo`} className="max-w-full max-h-full object-contain" />
                       </div>
                     ) : (
-                      <div className="w-24 h-24 rounded-2xl flex items-center justify-center bg-primary/[0.08] text-primary/40 ring-4 ring-white/10">
-                        <i className="fas fa-project-diagram text-3xl"></i>
+                      <div className="relative w-24 h-24 rounded-2xl overflow-hidden bg-white/90 flex items-center justify-center p-3 shadow-lg shadow-primary/15 ring-4 ring-white/10">
+                        <img src="/jd-logo.png" alt={`${project.title} logo`} className="max-w-full max-h-full object-contain" />
                       </div>
                     )}
                     <div className="absolute inset-0 bg-black/65 backdrop-blur-sm opacity-0 hover:opacity-100 transition-all duration-300 flex items-center justify-center gap-3">
@@ -125,13 +208,18 @@ export default function Projects() {
                   <CardHeader className="space-y-3 bg-black/30">
                     <div className="flex items-center gap-2 flex-wrap">
                       <CardTitle className="text-lg text-white flex items-center gap-2">{project.title}</CardTitle>
-                      <Badge variant="outline" className="text-[11px] uppercase tracking-[0.12em] border-primary/40 text-primary bg-primary/10">Tech Lead</Badge>
-                      <Badge variant="outline" className="text-[11px] uppercase tracking-[0.12em] border-white/15 text-white/70">Sinds 2022</Badge>
+                      <Badge variant="outline" className="text-[11px] uppercase tracking-[0.12em] border-white/15 text-white/70">{projectYears[project.title] ?? '2025'}</Badge>
                     </div>
                     <CardDescription className="text-white/90 leading-relaxed">{description}</CardDescription>
                     <ul className="space-y-2 text-sm text-white/80">
-                      <li className="flex items-start gap-2"><span className="mt-1 h-1.5 w-1.5 rounded-full bg-primary"></span> Outcome-first: roadmap, metrics en ship cadence afgestemd op business KPI’s.</li>
-                      <li className="flex items-start gap-2"><span className="mt-1 h-1.5 w-1.5 rounded-full bg-primary"></span> Product-engineering stack: design systems, observability, release discipline.</li>
+                      {project.title === 'VVC' ? (
+                        <>
+                          <li className="flex items-start gap-2"><span className="mt-1 h-1.5 w-1.5 rounded-full bg-primary"></span> Outcome-first: roadmap, metrics en ship cadence afgestemd op business KPI's.</li>
+                          <li className="flex items-start gap-2"><span className="mt-1 h-1.5 w-1.5 rounded-full bg-primary"></span> Product-engineering stack: design systems, observability, release discipline.</li>
+                        </>
+                      ) : (projectBullets[project.title] ?? []).map((bullet, bi) => (
+                        <li key={bi} className="flex items-start gap-2"><span className="mt-1 h-1.5 w-1.5 rounded-full bg-primary flex-shrink-0"></span> {bullet}</li>
+                      ))}
                     </ul>
                   </CardHeader>
                   <CardContent className="flex flex-wrap gap-2 justify-between items-center bg-black/30">

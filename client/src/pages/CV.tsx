@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import resumeData, { type Experience } from '@/data/resumeData';
+import { useTranslation } from 'react-i18next';
 
 type RoleKey =
   | 'business'
@@ -53,7 +54,7 @@ const roles: Record<RoleKey, RoleConfig> = {
     accent: 'text-blue-400',
     accentBg: 'bg-blue-500/10',
     accentBorder: 'border-blue-500/25',
-    summary: 'Resultaatgerichte Business Developer met bewezen ervaring in sales, consultancy, strategisch advies en het opbouwen van duurzame klantrelaties. Combineert commerciële slagkracht met technische kennis om groei te realiseren voor organisaties in diverse sectoren.',
+    summary: '5 jaar B2B sales als consistent top performer en teamleider. Van koude acquisitie en deur-tot-deur tot enterprise closing en compliance management. Commerciële executie op hoog tempo, gericht op omzetgeneratie en duurzame klantwaarde.',
     coreSkills: [
       'Business Development', 'Account Management', 'Sales Strategy', 'Go-to-Market',
       'Stakeholder Management', 'Consultancy', 'Growth Hacking', 'KPI & OKR Setup',
@@ -73,11 +74,11 @@ const roles: Record<RoleKey, RoleConfig> = {
     relevantSkillCategories: [0],
     relevantProjects: ['VVC', 'Investbotiq', 'Angels Mediate'],
     highlights: [
-      'Topverkoper bij Essent — 2 jaar consistent boven target',
+      'Topverkoper bij Essent, 2 jaar consistent boven target',
       'Senior Consultant bij Pearson & Partners',
       'Consultant bij VodafoneZiggo & Eneco',
       'Teamleider en Compliance Manager ervaring',
-      'Oprichter VVC — zakelijke dienstverlening & consultancy platform'
+      'Oprichter VVC: zakelijke dienstverlening & consultancy platform'
     ]
   },
   salesEngineer: {
@@ -136,7 +137,7 @@ const roles: Record<RoleKey, RoleConfig> = {
       hasTech(exp, ['React', 'Node.js', 'TypeScript', 'Fullstack', 'API', 'PostgreSQL', 'Docker']) ||
       ['Full Stack Developer', 'Freelancer', 'IT-stagiair'].includes(exp.title),
     relevantSkillCategories: [2, 3],
-    relevantProjects: ['Spontiva', 'DJOBBA', 'WoningVrij', 'Investbotiq'],
+    relevantProjects: ['Spontiva', 'DJOBBA', 'WoningVry', 'Investbotiq'],
     highlights: [
       'End-to-end features: frontend, backend, infra en monitoring',
       'CI/CD pipelines opgezet voor snelle releases',
@@ -260,7 +261,7 @@ const roles: Record<RoleKey, RoleConfig> = {
       hasTech(exp, ['Freelance', 'Fullstack', 'React', 'Node.js', 'CI/CD', 'Cloud']) ||
       ['Tech Lead', 'Freelancer', 'Full Stack Developer'].includes(exp.title),
     relevantSkillCategories: [2, 3, 0],
-    relevantProjects: ['Spontiva', 'DJOBBA', 'WoningVrij', 'Investbotiq', 'VVC'],
+    relevantProjects: ['Spontiva', 'DJOBBA', 'WoningVry', 'Investbotiq', 'VVC'],
     highlights: [
       '5+ platformen als freelancer gebouwd en onderhouden',
       'Snelle oplevering met CI/CD en infra-automation',
@@ -352,9 +353,9 @@ const roles: Record<RoleKey, RoleConfig> = {
       ['Tech Lead', 'Full Stack Developer', 'IT-stagiair', 'Kwaliteitsspecialist', 'Freelancer'
       ].includes(exp.title),
     relevantSkillCategories: [2, 3],
-    relevantProjects: ['Spontiva', 'DJOBBA', 'WoningVrij', 'Investbotiq'],
+    relevantProjects: ['Spontiva', 'DJOBBA', 'WoningVry', 'Investbotiq'],
     highlights: [
-      'Tech Lead bij Spontiva LTD — architectuur, delivery en teamaansturing',
+      'Tech Lead bij Spontiva LTD: architectuur, delivery en teamaansturing',
       '6+ platformen gebouwd van concept tot productie',
       'Tech stack: React, Node.js, Python, TypeScript, PostgreSQL, Docker',
       'Cloud ervaring met AWS, GCP, Azure, Oracle Cloud',
@@ -368,7 +369,7 @@ const roles: Record<RoleKey, RoleConfig> = {
     accent: 'text-amber-400',
     accentBg: 'bg-amber-500/10',
     accentBorder: 'border-amber-500/25',
-    summary: 'AI-native MVP Architect die ideeën vertaalt naar werkende producten. Specialiseert in rapid prototyping, product discovery, en het bouwen van schaalbare MVP\'s voor startups en founders. Combineert design thinking met engineering skills om in weken te leveren waar anderen maanden over doen.',
+    summary: 'AI-native Business IT Developer die sales, bouwen en systeemdenken combineert in één profiel. Geen traditionele verkoper en geen pure developer: van strategie tot closing, van architectuur tot live product. Ik bouw het systeem én doe de deal.',
     coreSkills: [
       'Product Discovery', 'Rapid Prototyping', 'MVP Development', 'Design Thinking',
       'Product-Market Fit', 'UX/UI Prototyping', 'Full-Stack Development',
@@ -384,7 +385,7 @@ const roles: Record<RoleKey, RoleConfig> = {
       ['Tech Lead', 'Full Stack Developer', 'Senior Consultant', 'Freelancer'
       ].includes(exp.title),
     relevantSkillCategories: [0, 2, 3],
-    relevantProjects: ['VVC', 'Spontiva', 'DJOBBA', 'WoningVrij', 'Investbotiq', 'Angels Mediate'],
+    relevantProjects: ['VVC', 'Spontiva', 'DJOBBA', 'WoningVry', 'Investbotiq', 'Angels Mediate'],
     highlights: [
       '6 platformen ontworpen, gebouwd en gelanceerd',
       'Van idee naar live product in 2-4 weken per project',
@@ -410,13 +411,14 @@ const roleOrder: RoleKey[] = [
 ];
 
 const education = [
-  { degree: 'Berlage Lyceum Economics', school: '', period: '' },
-  { degree: 'TRIAS Business & Administration', school: '', period: '' },
-  { degree: 'Turbo traject MHBO Business Marketing & Communication', school: '', period: '' },
-  { degree: 'HBO Rechten (Numerus Fixus)', school: '', period: '' },
+  { degree: 'HBO-Law', school: 'Hogeschool Utrecht', period: '2014 – 2016' },
+  { degree: 'Business Marketing & Communication', school: 'Regio College', period: '2012 – 2014' },
+  { degree: 'Business Finance', school: 'TRIAS', period: '2010 – 2012' },
+  { degree: 'Business Economy', school: 'Berlage Lyceum', period: '2007 – 2010' },
 ];
 
 export default function CV() {
+  const { t } = useTranslation();
   const [activeRole, setActiveRole] = useState<RoleKey>('architect');
 
   useEffect(() => {
@@ -424,6 +426,8 @@ export default function CV() {
   }, []);
 
   const role = roles[activeRole];
+  const translatedSummary = t(`cv.roleData.${activeRole}.summary`);
+  const translatedHighlights = t(`cv.roleData.${activeRole}.highlights`, { returnObjects: true }) as string[];
   const { personalInfo, experiences: rawExperiences, projects, detailedSkillCategories } = resumeData;
   const experiences = rawExperiences as Experience[];
 
@@ -441,7 +445,7 @@ export default function CV() {
         {/* Role Sidebar */}
         <aside className="glass-strong rounded-2xl p-4 md:sticky md:top-24 space-y-3 print-avoid-break">
           <div className="flex items-center gap-2 text-xs font-semibold uppercase tracking-[0.15em] text-white/70">
-            <i className="fas fa-layer-group text-white/60" /> Rollen
+            <i className="fas fa-layer-group text-white/60" /> {t('cv.roles')}
           </div>
           <div className="flex flex-wrap md:flex-col gap-2">
             {roleOrder.map((key) => {
@@ -460,7 +464,7 @@ export default function CV() {
                     <i className={`fas ${r.icon} text-xs`}></i>
                     <span className="truncate">{r.label}</span>
                   </span>
-                  {activeRole === key && <span className={`text-[10px] ${r.accent}`}>Actief</span>}
+                  {activeRole === key && <span className={`text-[10px] ${r.accent}`}>{t('cv.active')}</span>}
                 </button>
               );
             })}
@@ -487,7 +491,7 @@ export default function CV() {
                     {personalInfo.name}
                   </h1>
                   <p className={`text-lg font-medium ${role.accent} mb-4`}>{role.title}</p>
-                  <p className="text-white/80 text-sm leading-relaxed mb-5">{role.summary}</p>
+                  <p className="text-white/80 text-sm leading-relaxed mb-5">{translatedSummary}</p>
                   <div className="flex flex-wrap gap-x-5 gap-y-2 text-xs text-white/60">
                     <span className="flex items-center gap-1.5">
                       <i className="fas fa-map-marker-alt"></i> {personalInfo.location}
@@ -496,7 +500,7 @@ export default function CV() {
                       <i className="fas fa-envelope"></i> {personalInfo.email}
                     </span>
                     <span className="flex items-center gap-1.5">
-                      <i className="fas fa-globe"></i> Nederlands (Moedertaal) · Engels (Vloeiend)
+                      <i className="fas fa-globe"></i> {t('cv.languagesValue')}
                     </span>
                   </div>
                 </div>
@@ -507,10 +511,10 @@ export default function CV() {
             <div className="glass rounded-2xl p-6 md:p-8 mb-6 print-avoid-break">
               <div className="flex items-center gap-2 mb-5">
                 <div className={`w-1.5 h-5 rounded-full ${role.accent.replace('text-', 'bg-')}`} />
-                <h2 className={`text-sm font-bold uppercase tracking-[0.15em] ${role.accent}`}>Highlights</h2>
+                <h2 className={`text-sm font-bold uppercase tracking-[0.15em] ${role.accent}`}>{t('cv.highlights')}</h2>
               </div>
               <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
-                {role.highlights.map((h, i) => (
+                {translatedHighlights.map((h, i) => (
                   <motion.div
                     key={i}
                     className="flex items-start gap-3 p-3 rounded-xl bg-white/[0.02] border border-white/[0.05]"
@@ -529,7 +533,7 @@ export default function CV() {
             <div className="glass rounded-2xl p-6 md:p-8 mb-6 print-avoid-break">
               <div className="flex items-center gap-2 mb-5">
                 <div className={`w-1.5 h-5 rounded-full ${role.accent.replace('text-', 'bg-')}`} />
-                <h2 className={`text-sm font-bold uppercase tracking-[0.15em] ${role.accent}`}>Kernvaardigheden</h2>
+                <h2 className={`text-sm font-bold uppercase tracking-[0.15em] ${role.accent}`}>{t('cv.coreSkills')}</h2>
               </div>
               <div className="flex flex-wrap gap-2">
                 {role.coreSkills.map((skill, i) => (
@@ -550,7 +554,7 @@ export default function CV() {
             <div className="glass rounded-2xl p-6 md:p-8 mb-6 print-avoid-break">
               <div className="flex items-center gap-2 mb-5">
                 <div className={`w-1.5 h-5 rounded-full ${role.accent.replace('text-', 'bg-')}`} />
-                <h2 className={`text-sm font-bold uppercase tracking-[0.15em] ${role.accent}`}>Tech Stack & Tools</h2>
+                <h2 className={`text-sm font-bold uppercase tracking-[0.15em] ${role.accent}`}>{t('cv.techStack')}</h2>
               </div>
               <div className="space-y-5">
                 {relevantSkillCats.map((cat, ci) => (
@@ -578,53 +582,12 @@ export default function CV() {
               </div>
             </div>
 
-            {/* Experience */}
-            <div className="glass rounded-2xl p-6 md:p-8 mb-6 print-avoid-break">
-              <div className="flex items-center gap-2 mb-6">
-                <div className={`w-1.5 h-5 rounded-full ${role.accent.replace('text-', 'bg-')}`} />
-                <h2 className={`text-sm font-bold uppercase tracking-[0.15em] ${role.accent}`}>Relevante Ervaring</h2>
-                <span className="text-[10px] text-white/60 ml-1">({relevantExperiences.length})</span>
-              </div>
-              <div className="space-y-0">
-                {relevantExperiences.map((exp, index) => (
-                  <motion.div
-                    key={exp.title + exp.company}
-                    className="glass glass-hover rounded-2xl p-5 print-avoid-break"
-                    initial={{ opacity: 0, y: 8 }}
-                    animate={{ opacity: 1, y: 0 }}
-                    transition={{ delay: index * 0.04 }}
-                  >
-                    {/* Timeline line */}
-                    <div className="absolute left-[7px] top-2 bottom-0 w-px bg-white/[0.06] group-last:hidden" />
-                    {/* Timeline dot */}
-                    <div className={`absolute left-0 top-[7px] w-[15px] h-[15px] rounded-full border-2 ${role.accentBorder} bg-darkBg`}>
-                      <div className={`absolute inset-[3px] rounded-full ${role.accent.replace('text-', 'bg-')} opacity-60`} />
-                    </div>
-
-                    <div className="flex flex-col sm:flex-row sm:items-baseline sm:justify-between gap-1 mb-1">
-                      <h3 className="text-[15px] font-semibold text-white">{exp.title}</h3>
-                      <span className="text-[11px] text-white/65 font-mono whitespace-nowrap">{exp.period}</span>
-                    </div>
-                    <p className={`text-xs font-medium ${role.accent} opacity-80 mb-1`}>{exp.company}</p>
-                    <p className="text-xs text-white/70 leading-relaxed">{exp.description}</p>
-                    <div className="flex flex-wrap gap-1 mt-2">
-                      {exp.technologies.map((tech, ti) => (
-                        <span key={ti} className="px-1.5 py-0.5 text-[10px] text-white/70 bg-white/[0.05] rounded border border-white/[0.08]">
-                          {tech}
-                        </span>
-                      ))}
-                    </div>
-                  </motion.div>
-                ))}
-              </div>
-            </div>
-
             {/* Projects */}
             {relevantProjects.length > 0 && (
               <div className="glass rounded-2xl p-6 md:p-8 mb-6 print-avoid-break">
                 <div className="flex items-center gap-2 mb-5">
                   <div className={`w-1.5 h-5 rounded-full ${role.accent.replace('text-', 'bg-')}`} />
-                  <h2 className={`text-sm font-bold uppercase tracking-[0.15em] ${role.accent}`}>Projecten</h2>
+                  <h2 className={`text-sm font-bold uppercase tracking-[0.15em] ${role.accent}`}>{t('cv.projects')}</h2>
                 </div>
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
                   {relevantProjects.map((proj, i) => (
@@ -663,7 +626,7 @@ export default function CV() {
               <div className="glass rounded-2xl p-6 print-avoid-break">
                 <div className="flex items-center gap-2 mb-5">
                   <div className={`w-1.5 h-5 rounded-full ${role.accent.replace('text-', 'bg-')}`} />
-                  <h2 className={`text-sm font-bold uppercase tracking-[0.15em] ${role.accent}`}>Opleiding</h2>
+                  <h2 className={`text-sm font-bold uppercase tracking-[0.15em] ${role.accent}`}>{t('cv.education')}</h2>
                 </div>
                 <div className="space-y-4">
                   {education.map((edu, i) => (
@@ -681,11 +644,11 @@ export default function CV() {
               <div className="glass rounded-2xl p-6 print-avoid-break">
                 <div className="flex items-center gap-2 mb-5">
                   <div className={`w-1.5 h-5 rounded-full ${role.accent.replace('text-', 'bg-')}`} />
-                  <h2 className={`text-sm font-bold uppercase tracking-[0.15em] ${role.accent}`}>Profiel</h2>
+                  <h2 className={`text-sm font-bold uppercase tracking-[0.15em] ${role.accent}`}>{t('cv.profile')}</h2>
                 </div>
 
                 <div className="mb-5">
-                  <span className="text-[10px] font-semibold text-white/70 uppercase tracking-wider">Talen</span>
+                  <span className="text-[10px] font-semibold text-white/70 uppercase tracking-wider">{t('cv.languages')}</span>
                   <div className="flex gap-3 mt-2">
                     {personalInfo.languages.map((lang, i) => (
                       <div key={i} className="flex items-center gap-2">
@@ -697,7 +660,7 @@ export default function CV() {
                 </div>
 
                 <div>
-                  <span className="text-[10px] font-semibold text-white/70 uppercase tracking-wider">Soft Skills</span>
+                  <span className="text-[10px] font-semibold text-white/70 uppercase tracking-wider">{t('cv.softSkills')}</span>
                   <div className="flex flex-wrap gap-1.5 mt-2">
                     {personalInfo.softSkills.map((skill, i) => (
                       <span key={i} className="px-2.5 py-1 text-xs text-white/75 bg-white/[0.05] rounded-lg border border-white/[0.08]">
@@ -716,7 +679,7 @@ export default function CV() {
                 className={`inline-flex items-center gap-2 px-6 py-3 rounded-2xl glass text-sm font-medium ${role.accent} hover:bg-white/[0.06] transition-all duration-200`}
               >
                 <i className="fas fa-print text-xs"></i>
-                Print / Download als PDF
+                {t('cv.print')}
               </button>
             </div>
 

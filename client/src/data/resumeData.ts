@@ -46,10 +46,10 @@ export interface Project {
 const resumeData = {
   personalInfo: {
     name: "Jamal Drenthe",
-    title: "AI-native MVP Engineer / Architect / Developer",
+    title: "AI-Native Business IT Developer & MVP Architect",
     location: "Amsterdam, Nederland",
-    email: "js.drenthe@gmail.com",
-    summary: "Ik ontwerp en bouw complete producten van idee tot werkende realiteit. Voor startups en founders vertaal ik concepten naar launch-klare MVP's, schaalbare platformen en geautomatiseerde businesssystemen.",
+    email: "info@jamaldrenthe.com",
+    summary: "Ik combineer sales, bouwen en systeemdenken in één profiel. Geen traditionele verkoper en geen pure developer: ik sluit deals, bouw platforms en automatiseer bedrijfssystemen van A tot Z.",
     languages: [
       { language: "Nederlands", level: "Moedertaal" },
       { language: "Engels", level: "Vloeiend" }
@@ -58,14 +58,13 @@ const resumeData = {
       "Zelfsturend",
       "Deadline-gericht",
       "Probleemoplosser",
-      "Gebruikersgericht ontwerp",
       "Teamspeler"
     ]
   },
   
   detailedSkillCategories: [
     {
-      title: "Architect & Strategieën",
+      title: "Architectuur & Strategie",
       icon: "fa-chess",
       emoji: "1️⃣",
       subtitle: "Conceptontwikkeling, businessstructuren, product- en platformplanning, groeistrategie.",
@@ -344,7 +343,39 @@ const resumeData = {
       company: "Hogeschool van Amsterdam",
       period: "sep. 2007 - jul. 2008",
       description: "Eerste IT-ervaring tijdens een stageproject.",
-      technologies: ["IT Support", "Systeembeheer"],
+      technologies: [],
+      type: "opleiding"
+    },
+    {
+      title: "HBO-Law",
+      company: "Hogeschool Utrecht",
+      period: "2014 - 2016",
+      description: "HBO-opleiding Rechten.",
+      technologies: ["Rechten", "Juridisch Advies", "Bestuursrecht", "Bedrijfsrecht"],
+      type: "opleiding"
+    },
+    {
+      title: "Business Marketing & Communication",
+      company: "Regio College",
+      period: "2012 - 2014",
+      description: "Business Marketing & Communication Studies.",
+      technologies: ["Marketing", "Communicatie", "Business"],
+      type: "opleiding"
+    },
+    {
+      title: "Business Finance",
+      company: "TRIAS",
+      period: "2010 - 2012",
+      description: "MBO-opleiding Business Finance.",
+      technologies: ["Finance", "Bedrijfsadministratie", "Management"],
+      type: "opleiding"
+    },
+    {
+      title: "Business Economy",
+      company: "Berlage Lyceum",
+      period: "2007 - 2010",
+      description: "HAVO Business Economy.",
+      technologies: ["Economie", "Business", "Wiskunde"],
       type: "opleiding"
     }
   ],
@@ -352,55 +383,93 @@ const resumeData = {
   projects: [
     {
       title: "VVC",
-      description: "Tech Lead — innovatief platform voor zakelijke dienstverlening en consultancy (Referral Clique LTD, sinds 2022 – heden).",
+      description: "Innovatief platform voor zakelijke dienstverlening en consultancy.",
       technologies: ["React", "TypeScript", "Tailwind"],
       demoLink: "https://verdienendevrienden.club",
       sourceLink: "https://github.com/JamalDrenthe/vvc-webapp"
     },
     {
       title: "Investbotiq",
-      description: "Tech Lead — AI-gedreven investeringsplatform dat financiële data verzamelt, structureert en analyseert met kwant/AI-modellen, interactieve visualisaties en een realtime API-laag (Cloud Run) sinds 2022.",
+      description: "Een intelligent platform voor vermogensbeheer en investeringsstrategieën.",
       technologies: [
-        "React",
-        "Supabase",
-        "D3.js",
+        "Next.js",
+        "TypeScript",
+        "Python",
         "FastAPI",
-        "Python (NumPy, Pandas, SciPy, statsmodels, TensorFlow)",
-        "Plotly",
-        "Selenium",
-        "Requests",
-        "Google Cloud (Cloud Storage, BigQuery, Cloud Run)"
+        "PostgreSQL",
+        "Docker",
+        "Cloud Run"
       ],
       demoLink: "https://app.investbotiq.com",
-      sourceLink: "#"
+      sourceLink: "https://github.com/JamalDrenthe/investbotiq"
     },
     {
       title: "Spontiva",
-      description: "Tech Lead — sportmanagement- en planning platform (Referral Clique LTD, sinds 2022 – heden).",
+      description: "Platform gericht op Time Gap Cashflow analyse en uitvoering voor bedrijven.",
       technologies: ["React", "Node.js", "PostgreSQL"],
       demoLink: "https://spontiva.nl",
-      sourceLink: "#"
+      sourceLink: "https://github.com/JamalDrenthe/spontiva"
     },
     {
-      title: "WoningVrij",
-      description: "Tech Lead — vastgoedplatform voor het vinden en beheren van woonruimte.",
+      title: "WoningVry",
+      description: "Vastgoedplatform voor het vinden en beheren van woonruimte.",
       technologies: ["React", "Vite", "Firebase"],
       demoLink: "https://woningvrij.nl",
-      sourceLink: "#"
+      sourceLink: "https://github.com/JamalDrenthe/WoningVry"
     },
     {
       title: "DJOBBA",
-      description: "Tech Lead — platform voor flexibele arbeidsbemiddeling.",
+      description: "Platform voor flexibele arbeidsbemiddeling en personeelsmatching.",
       technologies: ["React", "Tailwind", "Express"],
-      demoLink: "https://djobba.nl",
-      sourceLink: "#"
+      demoLink: "https://djobba.nl"
     },
     {
       title: "Angels Mediate",
-      description: "Tech Lead — platform voor mediation en conflictoplossing.",
+      description: "Platform voor mediation en conflictoplossing.",
       technologies: ["React", "TypeScript", "Tailwind"],
-      demoLink: "https://angelsmediate.com",
-      sourceLink: "#"
+      demoLink: "https://angelsmediate.com"
+    },
+    {
+      title: "Reken Tools",
+      description: "Slimme rekenmodules voor financiële en zakelijke berekeningen.",
+      technologies: ["React", "TypeScript", "Tailwind"],
+      demoLink: "#"
+    },
+    {
+      title: "Chat Tools",
+      description: "AI-gestuurde chatinterfaces en gespreksassistenten op maat.",
+      technologies: ["React", "OpenAI", "Node.js", "TypeScript"],
+      demoLink: "#"
+    },
+    {
+      title: "Video Gen Tool",
+      description: "AI-gedreven videogeneratietool voor content en marketing.",
+      technologies: ["React", "Python", "FAL.ai", "Node.js"],
+      demoLink: "#"
+    },
+    {
+      title: "Music DJ Tool",
+      description: "Browser-based DJ- en muziekmixapplicatie.",
+      technologies: ["React", "Web Audio API", "Tone.js", "TypeScript"],
+      demoLink: "#"
+    },
+    {
+      title: "Spraak Tools",
+      description: "Spraakherkenning en tekst-naar-spraak tooling voor zakelijke toepassingen.",
+      technologies: ["React", "Web Speech API", "Whisper", "Python"],
+      demoLink: "#"
+    },
+    {
+      title: "Dashboards",
+      description: "Modulaire business-dashboards voor KPI-monitoring en datavisualisatie.",
+      technologies: ["React", "Recharts", "D3.js", "Supabase"],
+      demoLink: "#"
+    },
+    {
+      title: "Content",
+      description: "AI-native contentcreatie en -beheerplatform voor marketing en groei.",
+      technologies: ["React", "OpenAI", "Node.js", "TypeScript"],
+      demoLink: "#"
     }
   ],
 } as const;

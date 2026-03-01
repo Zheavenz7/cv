@@ -18,8 +18,8 @@ export default function Footer() {
           <div className="flex items-center gap-2">
             {[
               { href: "https://www.linkedin.com/in/jamaldrenthe/", icon: "fab fa-linkedin", label: "LinkedIn" },
-              { href: "#", icon: "fab fa-github", label: "GitHub" },
-              { href: "#contact", icon: "fas fa-envelope", label: "Contact" }
+              { href: "https://github.com/jamaldrenthe", icon: "fab fa-github", label: "GitHub" },
+              { href: "mailto:info@jamaldrenthe.com", icon: "fas fa-envelope", label: "Contact" }
             ].map((social, i) => (
               <motion.a 
                 key={social.label}
